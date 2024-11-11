@@ -1,0 +1,69 @@
+form{
+    width: 350px;
+    height: 350px;
+    background: #FDF9FA;
+    border-radius: 15%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form .user-icon{
+    width: 8%;
+    min-width: 28px;
+    max-height: 40px;
+    margin-top: 15%;
+    margin-bottom: 5%;
+}
+
+form div{
+    display: flex;
+    flex-direction: column;
+    /* background: blue; */
+    width: 70%;
+    margin-top: 5%;
+}
+form div label{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-transform: capitalize;
+    color: rgba(38, 33, 70,0.8);
+}
+form div input{
+    background: none;
+    outline: none;
+    border: none;
+    box-shadow: 0px 2px 0px 0px rgba(36, 36, 63,0.5);
+    margin-top: 2%;
+    box-sizing: content-box;
+}
+form div p{
+    margin-top: 1%;
+    color: rgba(38, 33, 70,0.8);
+    font-size: 10px;
+}
+.error-form{
+    font-size: 12px;
+    color: red;
+    text-align: center;
+}
+form button{
+    margin-top: 8%;
+    outline: none;
+    border: none;
+    background: #CA79C6;
+    color: white;
+    padding:6px 20px;
+    margin-bottom: 4%;
+}
+form button:hover{
+    cursor: pointer;
+}
+form span a{
+    font-size: 12px;
+    text-decoration: none;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: rgba(38, 33, 70,0.8);
+}
+form span a:hover{
+    cursor: pointer;
+}

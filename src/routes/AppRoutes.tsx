@@ -1,6 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import routes from './Routes'
 
+
+
 const AppRoutes = () => {
     return (
         <BrowserRouter>
@@ -13,7 +15,7 @@ const AppRoutes = () => {
                     <Route
                     key={key}
                     path={path}
-                    element={ 
+                    element={
                         <Element />
                     }
                     />

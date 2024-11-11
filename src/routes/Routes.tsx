@@ -1,6 +1,7 @@
 import LoginPage from "../features/Auth/LoginPage";
 import RecoverPassword from "../features/Auth/RecoverPassword";
 import SetNewPassword from "../features/Auth/SetNewPassword";
+import Dashboard from "../features/Dashboard/Dashboard";
 import Home from "../features/Home/Home";
 
 interface RouteType {
@@ -21,15 +22,21 @@ const routes: RouteType[] = [
     isPrivate: false,
   },
   {
+    path: "/dasboard/:user",
+    element: Dashboard,
+    isPrivate: true,
+  },
+  {
     path: "/recovery",
     element: RecoverPassword,
     isPrivate: true,
   },
   {
-    path: "/admin/oportunidades/:id",
+    path: "/setNewPassword",
     element: SetNewPassword,
     isPrivate: true,
   },
+  
 ];
 
 export default routes;
