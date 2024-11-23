@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useForm, SubmitHandler, FieldValues } from 'react-hook-form'
+import { useForm, SubmitHandler } from 'react-hook-form'
 import { useNavigate } from "react-router-dom"
 import "./SetNewPassoword.css"
 
