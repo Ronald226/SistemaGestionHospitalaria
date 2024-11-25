@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import './LoginPage.css'
 import { useNavigate } from "react-router-dom"
+import login from "../../services/Auth/login"
 
 interface ILoginForm {
     user: string;
@@ -12,6 +13,9 @@ const LoginPage:React.FC = () => {
 
     const {register, handleSubmit, formState: { errors } } = useForm<ILoginForm>();
     
+    
+    
+    
     // Función que maneja el envío del formulario
     const navigate = useNavigate();
     const [msg,setText]=useState("");
@@ -20,13 +24,27 @@ const LoginPage:React.FC = () => {
         navigate('/recovery');
     }
 
-    const onSubmit: SubmitHandler<ILoginForm> = (data) => {
+    const onSubmit: SubmitHandler<ILoginForm> = async (data) => {
         console.log(data); // Aquí puedes manejar el login (API, redirección, etc.)
-        if(data.user=="acasanova" && (data.password=="123456789" || data.password=="123456")){
-            navigate(`/dasboard/${data.user}`);
+        const data_user =  await login(data.user,data.password); 
+        
+        console.log(data_user);
+
+        if(data_user != null){
+            console.log("exito");
+            const user = { email: data_user.email, token: data_user.token };
+            localStorage.setItem('usuario', JSON.stringify(user));
+           
+            navigate(`/patients`);
         }else{
             setText("Usuario o contraseña no valido");
         }
+
+        // if(data.user=="acasanova" && (data.password=="123456789" || data.password=="123456")){
+        //     navigate(`/dasboard/${data.user}`);
+        // }else{
+        //     setText("Usuario o contraseña no valido");
+        // }
         
     };
     
@@ -37,16 +55,13 @@ const LoginPage:React.FC = () => {
                     <img src="/img/user-icon.png" alt="user" className='user-icon' />
                     <p className='error-form'>{msg}</p>
                     <div>
-                        <label htmlFor='name'>usuario</label>
+                        <label htmlFor='name'>email</label>
                         <input id='name' 
                         type="text" 
                         // placeholder='Coloca tu usuario'
                         {...register("user", {
                             required: "Campo es requerido",
-                            pattern: {
-                            value: /^[A-Za-z0-9._%+-]{2,}$/,
-                            message: "Ingresa un usuario valido."
-                            }
+                            
                         })}
                         />
                         {errors.user && <p>{errors.user.message}</p>}
