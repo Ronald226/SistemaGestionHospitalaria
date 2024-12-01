@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState} from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import './LoginPage.css'
 import { useNavigate } from "react-router-dom"
 import login from "../../services/Auth/login"
+import useStoreSesion  from '../../services/Auth/UserStore'
 
 interface ILoginForm {
     user: string;
@@ -12,8 +13,8 @@ interface ILoginForm {
 const LoginPage:React.FC = () => {
 
     const {register, handleSubmit, formState: { errors } } = useForm<ILoginForm>();
-    
-    
+    const { startToken, getTok  } = useStoreSesion();
+    // localStorage.setItem('usuario',"");
     
     
     // Función que maneja el envío del formulario
@@ -27,24 +28,19 @@ const LoginPage:React.FC = () => {
     const onSubmit: SubmitHandler<ILoginForm> = async (data) => {
         console.log(data); // Aquí puedes manejar el login (API, redirección, etc.)
         const data_user =  await login(data.user,data.password); 
-        
+       
         console.log(data_user);
 
         if(data_user != null){
             console.log("exito");
-            const user = { email: data_user.email, token: data_user.token };
-            localStorage.setItem('usuario', JSON.stringify(user));
-           
+            // const user = { email: data_user.email, token: data_user.token };
+            // localStorage.setItem('usuario', JSON.stringify(user));
+            startToken(data_user.token);
+            console.log(getTok())
             navigate(`/patients`);
         }else{
             setText("Usuario o contraseña no valido");
         }
-
-        // if(data.user=="acasanova" && (data.password=="123456789" || data.password=="123456")){
-        //     navigate(`/dasboard/${data.user}`);
-        // }else{
-        //     setText("Usuario o contraseña no valido");
-        // }
         
     };
     
@@ -69,7 +65,7 @@ const LoginPage:React.FC = () => {
                     <div>
                         <label htmlFor='pass'>contraseña</label>
                         <input id='pass' 
-                        type="password" 
+                        type="password" autoComplete='current-password'
                         // placeholder='Coloca tu contraseña'
                         {...register("password", {
                             required: "La contraseña es requerida",

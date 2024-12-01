@@ -1,8 +1,15 @@
 /* 
-.main-container {
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #d4e0ff, #fde7f9);
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  .main-container {
     display: flex;
     height: 100%;
-    width: 100%;
   }
   
   .header {
@@ -18,9 +25,8 @@
     transition: width 0.3s ease;
     border-radius: 10px;
   }
- 
   @media (min-width: 1200px) {
-   
+    
     .header {
       width: 80%; 
     }
@@ -29,7 +35,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    flex-grow: 1;
+    flex-grow: 1; 
   }
   
   .header-buttons {
@@ -55,7 +61,7 @@
     top: 50px;
     bottom: 150px;
     left: 20px;
-    display: flex; 
+    display: flex;
     flex-direction: column; 
     align-items: center; 
     transition: width 0.3s ease;
@@ -87,30 +93,14 @@
     color: rgb(0, 0, 0);
     border-radius: 5px;
   }
-  .form-actions{
-    display: flex;
-  }
-  .form-actions button{
-    width: 50;
-  }
-  .form-container form{
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    height: 100%;
-  }
-
   @media (max-width: 768px) {
+
     .sidebar ul li span:last-child {
       display: none; 
     }
   }
 
   .form-container {
-    height: 500px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     margin-top: 200px;
     margin-left: 25%;
     padding: 40px;
@@ -119,10 +109,6 @@
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
     width: 60%;
   }
-  .form-row{
-    width: 50%;
-  }
- 
   
   form h2 {
     margin-bottom: 20px;

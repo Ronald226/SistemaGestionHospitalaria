@@ -1,15 +1,15 @@
 import './ListPacient.css'
 import React,{ useState, useEffect } from "react";
-import {list_pacient, } from "../../services/Pacients/Pacients"
-
-const msm=()=>{
-    console.log("mensaje");
-}
+import {list_pacient } from "../../services/Pacients/Pacients"
+import useStoreSesion from '../../services/Auth/UserStore';
+import { useNavigate } from 'react-router-dom';
+import ControlsModuls from '../layaout/ControlsModuls';
 
 const ListPacient: React.FC = ()=>{
     const [msg, setText] = useState<string>("Cargando datos...");
     const [pacients, setPacients] = useState<any[]>([]); // Almacena la lista de pacientes
-
+    const {destroyToken}=useStoreSesion();
+    const navigate = useNavigate();
     // Función para obtener la lista de pacientes
     const fetchPacients = async () => {
         const data = await list_pacient();
@@ -22,63 +22,74 @@ const ListPacient: React.FC = ()=>{
             setText("Error al cargar los datos.");
         }
     };
+    
+    
 
     // Llama a fetchPacients al montar el componente
     useEffect(() => {
         fetchPacients();
     }, []);
 
-
     return (
-        <div className="main-container">
-            {/* Header */}
-            <header className="header">
-                <div className="logo-container">
-                <img
-                    src="https://via.placeholder.com/80"
-                    alt="Logo"
-                    className="logo"
-                />
-                <h1>Listar Paciente</h1>
-                </div>
-                <div className="header-buttons">
-                <button className="icon-button">👤</button>
-                <button className="icon-button">🔔</button>
-                </div>
-            </header>
-
-            {/* Sidebar */}
-            <aside className="sidebar">
-                <img src="https://via.placeholder.com/80" alt="Logo" className="logo" />
-                <h2>Usuario</h2>
-                <ul>
-                <li>
-                    <span>🖥️</span> <span>Dashboard</span>
-                </li>
-                <li>
-                    <span>📋</span> <span>Pacientes</span>
-                </li>
-                <li>
-                    <span>📝</span> <span>Historial</span>
-                </li>
-                <li>
-                    <span>⚙️</span> <span>Configuración</span>
-                </li>
-                <li>
-                    <span>🔌</span> <span>Salir</span>
-                </li>
-                </ul>
-            </aside>
-
+       <>
+            <ControlsModuls></ControlsModuls>
             {/* Formulario principal */}
-            <main className="form-container">
-                <form className='d-flex flex-column'>
-                    <h1>Lista de Pacientes</h1>
-
-                </form>
+            <main className='main'>
                 
+                <Tabla_list_pacients pacients={pacients} msg={msg}></Tabla_list_pacients>
             </main>
-        </div>
+        </>
+    )
+}
+interface Tabla_list_pacient_props{
+    pacients:any,
+    msg:string
+}
+
+const Tabla_list_pacients:React.FC<Tabla_list_pacient_props>=({pacients,msg})=>{
+    const navigate = useNavigate();
+    const updatePacient=()=>{
+        navigate("/patients/update")
+    }
+    return (
+        <>
+            <form className='d-flex flex-column'>
+                        <h2>Lista de Pacientes</h2>
+                        {msg && <p>{msg}</p>} {/* Muestra mensajes si existen */}
+                        <table className='table text-center'>
+                        <thead>
+                            <tr>
+                                <th scope="col">Nombres</th>
+                                <th scope="col">Apellidos</th>
+                                <th scope="col">DNI</th>
+                                <th scope="col">N° Historia</th>
+                                <th scope="col">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {pacients.map((pacient:any, index:number) => (
+                                <tr key={index}>
+                                    <td >
+                                        {pacient.nombres}
+                                    </td>
+                                    <td>
+                                        {pacient.apellidos}
+                                    </td>
+                                    <td>
+                                        {pacient.dni}
+                                    </td>
+                                    <td>
+                                        {pacient.historia}
+                                    </td>
+                                    <td>
+                                        <img onClick={updatePacient} src="/img/btn-update.png" alt="" />
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                        </table>
+            </form>
+        </>
     )
 }
 

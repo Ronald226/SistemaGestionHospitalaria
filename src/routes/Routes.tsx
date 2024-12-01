@@ -14,17 +14,14 @@ interface RouteType {
   isPrivate: boolean;
 }
 
-const routes: RouteType[] = [
+export const routes: RouteType[] = [
   {
     path: "/",
     element: Home,
     isPrivate: false,
   },
-  {
-    path: "/login",
-    element: LoginPage,
-    isPrivate: false,
-  },
+  
+  
   {
     path: "/dasboard/:user",
     element: Dashboard,
@@ -62,4 +59,10 @@ const routes: RouteType[] = [
   },
 ];
 
-export default routes;
+export const routes_sesion:RouteType[] = [
+  {
+    path: "/login",
+    element: LoginPage,
+    isPrivate: false,
+  },
+];

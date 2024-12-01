@@ -45,3 +45,21 @@ export const list_pacient= async ()=>{
     }
     
 }
+export const pacient_search_dni= async (dni:number)=>{
+    
+    try {
+        const respon:any = await axiosInstance.get(`/pacientes/${dni}`);
+        if (respon.status === 200 || respon.status === 201) {
+            console.log("Consulta exitosa:", respon.data);
+            return respon.data; // Retorna los datos de la respuesta si es necesario
+          } else {
+            console.log("Consulta fallido:", respon.status);
+            return null;
+          }
+
+
+    }catch (error) {
+        console.error("Error en la solicitud:", error);
+        return null;
+    }
+}

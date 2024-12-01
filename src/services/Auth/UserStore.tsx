@@ -1,8 +1,22 @@
+import { useSesion } from "../../context/SesionContext";
 
-const SECRET_KEY = import.meta.env.VITE_APP_SECRET_KEY_USER_STORE;
+const useStoreSesion=()=>{
+    const { setSesion, setToken, isToken,isSesion } = useSesion();
+    const destroyToken=()=>{
+        setSesion(false);
+        setToken("");
+    }
+    const startToken=(tok:string)=>{
+        setSesion(true);
+        setToken(tok);
+    }
+    const getTok=()=>{
+        return isToken;
+    }
+    const getSes=()=>{
+        return isSesion;
+    }
+    return {destroyToken, getTok, startToken,getSes};
+};
 
-
-const user=()=>{
-    return true;
-}
-export default user;
+export default useStoreSesion;

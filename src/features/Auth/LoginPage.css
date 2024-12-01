@@ -1,4 +1,4 @@
-form{
+/* form{
     width: 350px;
     height: 350px;
     background: #FDF9FA;
@@ -19,7 +19,6 @@ form .user-icon{
 form div{
     display: flex;
     flex-direction: column;
-    /* background: blue; */
     width: 70%;
     margin-top: 5%;
 }
@@ -66,4 +65,4 @@ form span a{
 }
 form span a:hover{
     cursor: pointer;
-}
+} */
