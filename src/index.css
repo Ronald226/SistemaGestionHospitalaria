@@ -45,7 +45,72 @@ body{
   border-radius: 2%;
   box-shadow: 0 4px 15px 0 rgba(216, 210, 252,0.1);
 }
+/* Estilos Generales */
+h2{
+  font-size: 20px !important;
+}
+.section{
+  width: 100%;
+  overflow: hidden;
+  overflow-x: scroll;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.no-scroll{
+  overflow-x:hidden;
+  overflow: none;
+}
+.tabla{
+  min-width: 700px;
+}
+.tabla tbody tr{
+  height: 20px !important;
+  box-sizing: border-box;
+}
 
+.my-btn{
+  padding: 0 !important;
+  border: none;
+}
+.my-btn:hover{
+  cursor: pointer;
+  transform: scale(1.05);
+}
+.content-paginacion{
+  display: flex;
+  margin-top: 10px;
+  justify-content: center;
+  align-items: center; 
+}
+.content-paginacion ul{
+  list-style: none;
+  display: flex;
+
+}
+.content-paginacion ul li{
+  flex: 1;
+  text-align: center;
+  width: 40px;
+  height: 30px;
+  border: 2px solid;
+  margin: 0 5px;
+  border-radius: 15%;
+}
+.content-paginacion ul li:nth-child(2){
+  background: #000;
+  color: white;
+}
+
+.formulario{
+  border-radius: 2%;
+  box-shadow: 0px 0px 5px 0px rgba(1,1,1,0.5);
+  border: 1px solid rgba(1,1,1,0.2);
+  padding: 15px 10px;
+  max-width: 750px;
+  min-width: 600px;
+}
 
 /*Layout para medidas menores a 1200px*/
 @media (max-width: 1000px) {

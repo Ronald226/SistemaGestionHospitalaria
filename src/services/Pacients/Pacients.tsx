@@ -1,26 +1,27 @@
 import axiosInstance from "../AxiosInstance";
 
-export const register_pacient= async (dn:number,nomb:string,ape:string,hist:number)=>{
-    
+export const register_pacient= async (dn:number,nomb:String,ape:String,hist:number):Promise<boolean>=>{
+    const dni = parseInt(String(dn), 10);
+    const historia = parseInt(String(hist), 10);
     try {
         const respon:any = await axiosInstance.post('/pacientes',{
-            dni: dn,
+            dni: dni,
             nombres: nomb,
             apellidos: ape,
-            historia: hist
+            historia: historia,
         });
         if (respon.status === 200 || respon.status === 201) {
-            console.log("Login exitoso:", respon.data);
-            return respon.data; // Retorna los datos de la respuesta si es necesario
+            console.log("Creacion exitosa:", respon.data);
+            return true; // Retorna los datos de la respuesta si es necesario
           } else {
-            console.log("Login fallido:", respon.status);
-            return null;
+            console.log("Creacion fallida:", respon.status);
+            return false;
           }
 
 
     }catch (error) {
         console.error("Error en la solicitud:", error);
-        return null;
+        return false;
     }
     
 }

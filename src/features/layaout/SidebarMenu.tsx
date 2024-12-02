@@ -13,7 +13,7 @@ const SidebarMenu=()=>{
     
     
     return (
-        <img onClick={destroySesion} src="/img/power.png" alt="" />
+        <img className='btn' onClick={destroySesion} src="/img/power.png" alt="" />
     )
 }
 

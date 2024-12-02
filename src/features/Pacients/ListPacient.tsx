@@ -1,15 +1,14 @@
 import './ListPacient.css'
 import React,{ useState, useEffect } from "react";
 import {list_pacient } from "../../services/Pacients/Pacients"
-import useStoreSesion from '../../services/Auth/UserStore';
 import { useNavigate } from 'react-router-dom';
 import ControlsModuls from '../layaout/ControlsModuls';
 
 const ListPacient: React.FC = ()=>{
     const [msg, setText] = useState<string>("Cargando datos...");
     const [pacients, setPacients] = useState<any[]>([]); // Almacena la lista de pacientes
-    const {destroyToken}=useStoreSesion();
-    const navigate = useNavigate();
+    
+   
     // Función para obtener la lista de pacientes
     const fetchPacients = async () => {
         const data = await list_pacient();
@@ -53,42 +52,55 @@ const Tabla_list_pacients:React.FC<Tabla_list_pacient_props>=({pacients,msg})=>{
     }
     return (
         <>
-            <form className='d-flex flex-column'>
+            <div className='list-content'>
                         <h2>Lista de Pacientes</h2>
                         {msg && <p>{msg}</p>} {/* Muestra mensajes si existen */}
-                        <table className='table text-center'>
-                        <thead>
-                            <tr>
-                                <th scope="col">Nombres</th>
-                                <th scope="col">Apellidos</th>
-                                <th scope="col">DNI</th>
-                                <th scope="col">N° Historia</th>
-                                <th scope="col">Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {pacients.map((pacient:any, index:number) => (
-                                <tr key={index}>
-                                    <td >
-                                        {pacient.nombres}
-                                    </td>
-                                    <td>
-                                        {pacient.apellidos}
-                                    </td>
-                                    <td>
-                                        {pacient.dni}
-                                    </td>
-                                    <td>
-                                        {pacient.historia}
-                                    </td>
-                                    <td>
-                                        <img onClick={updatePacient} src="/img/btn-update.png" alt="" />
-                                    </td>
+                        <section className='section'>
+                        <table className='table  text-center tabla'>
+                            <thead className='table-dark mt-2'>
+                                <tr>
+                                    <th scope="col">Nombres</th>
+                                    <th scope="col">Apellidos</th>
+                                    <th scope="col">DNI</th>
+                                    <th scope="col">N° Historia</th>
+                                    <th scope="col">Acciones</th>
                                 </tr>
-                            ))}
-                        </tbody>
+                            </thead>
+                            <tbody>
+                                {pacients.map((pacient:any, index:number) => (
+                                    <tr key={index}>
+                                        <td >
+                                            {pacient.nombres}
+                                        </td>
+                                        <td>
+                                            {pacient.apellidos}
+                                        </td>
+                                        <td>
+                                            {pacient.dni}
+                                        </td>
+                                        <td>
+                                            {pacient.historia}
+                                        </td>
+                                        <td>
+                                            <img className='my-btn' onClick={updatePacient} src="/img/btn-update.png" alt="" />
+                                            <img className='my-btn' onClick={updatePacient} src="/img/btn-delete.png" alt="" />
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
                         </table>
-            </form>
+                        
+                        </section>
+                        <nav className='content-paginacion'>
+                                <ul>
+                                    <li>&#60;</li>
+                                    <li>1</li>
+                                    <li>2</li>
+                                    <li>3</li>
+                                    <li>&#62;</li>
+                                </ul>
+                        </nav>
+            </div>
         </>
     )
 }
