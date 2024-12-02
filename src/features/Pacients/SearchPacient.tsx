@@ -8,10 +8,19 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 interface ILoginForm {
     dni: number;
 }
-
+interface pacientsProps{
+    
+    dni:number,
+    nombres:string,
+    apellidos:string,
+    historia:number,
+    
+    
+    
+}
 const SearchPacient: React.FC = ()=>{
     const [msg, setText] = useState<string>("");
-    const [pacients, setPacients] = useState<any[]>([]); // Almacena la lista de pacientes
+    const [pacients, setPacients] = useState<pacientsProps|undefined>(undefined); // Almacena la lista de pacientes
 
     const {register, handleSubmit, formState: { errors } } = useForm<ILoginForm>();
 
@@ -59,44 +68,7 @@ const SearchPacient: React.FC = ()=>{
     
     return (
         <div className="main-container">
-            {/* Header */}
-            <header className="header">
-                <div className="logo-container">
-                <img
-                    src="https://via.placeholder.com/80"
-                    alt="Logo"
-                    className="logo"
-                />
-                <h1>Buscar Paciente</h1>
-                </div>
-                <div className="header-buttons">
-                <button className="icon-button">👤</button>
-                <button className="icon-button">🔔</button>
-                </div>
-            </header>
-
-            {/* Sidebar */}
-            <aside className="sidebar">
-                <img src="https://via.placeholder.com/80" alt="Logo" className="logo" />
-                <h2>Usuario</h2>
-                <ul>
-                <li>
-                    <span>🖥️</span> <span>Dashboard</span>
-                </li>
-                <li>
-                    <span>📋</span> <span>Pacientes</span>
-                </li>
-                <li>
-                    <span>📝</span> <span>Historial</span>
-                </li>
-                <li>
-                    <span>⚙️</span> <span>Configuración</span>
-                </li>
-                <li>
-                    <span>🔌</span> <span>Salir</span>
-                </li>
-                </ul>
-            </aside>
+           
 
             {/* Formulario principal */}
             
@@ -133,32 +105,35 @@ const SearchPacient: React.FC = ()=>{
                     <tbody>
                         {
                         
+                            pacients!=undefined?(
+                            pacients.length > 0 ? (
+                            pacients.map((pacient, index) => (
+                                <tr key={index}>
+                                    <td >
+                                        {pacient.nombres}
+                                    </td>
+                                    <td>
+                                        {pacient.apellidos}
+                                    </td>
+                                    <td>
+                                        {pacient.dni}
+                                    </td>
+                                    <td>
+                                        {pacient.historia}
+                                    </td>
+                                    <td>
 
-                        pacients.length > 0 ? (
-                        pacients.map((pacient, index) => (
-                            <tr key={index}>
-                                <td >
-                                    {pacient.nombres}
-                                </td>
-                                <td>
-                                    {pacient.apellidos}
-                                </td>
-                                <td>
-                                    {pacient.dni}
-                                </td>
-                                <td>
-                                    {pacient.historia}
-                                </td>
-                                <td>
-
-                                </td>
-                            </tr>
-                        ))
-                        ):(
-                            tabla_datos()
-                        )
-                        
+                                    </td>
+                                </tr>
+                            ))
+                            ):(
+                                tabla_datos()
+                            )
+                            ):(
+                                <p>No hay datos</p>
+                            )
                         }
+                        
                     </tbody>
                     </table>
                 </form>

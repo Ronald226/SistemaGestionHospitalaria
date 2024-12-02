@@ -1,39 +1,34 @@
-import { delete_pacient } from "../../services/Pacients/Pacients"
-import { useNavigate } from "react-router-dom";
-import "./DeletePacient.css"
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+
 interface DeletePacientProps{
     pacient: {
         dni:number,
         nombres:string,
         apellidos:string,
         historia:number,
+        fechaCreacion:string
     },
     index:number
 }
-const DeletePacient:React.FC<DeletePacientProps>=({pacient,index})=>{
+const ViewPacient:React.FC<DeletePacientProps>=({pacient,index})=>{
     console.log(pacient)
-    const navigate = useNavigate();
-    const DeletePacient= async (dni:number)=>{
-        const res=await delete_pacient(dni);
+    const formatDate = (isoDate: string): string => {
+        const date = new Date(isoDate);
     
-        if(res){
-            console.log("Paciente Eliminado");
-            
-            setTimeout(() => navigate('/patients'), 300);
-        }else{
-            console.log("No se pudo eliminar Paciente")
-        }
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const year = date.getFullYear();
     
-    }
+        return `${day}-${month}-${year}`;
+    };
+    
     return (
         <>
-        <img className='my-btn' data-bs-toggle="modal" data-bs-target={`#staticBackdrop${index}`} src="/img/btn-delete.png" alt="" />
-        <div className="modal fade" id={`staticBackdrop${index}`} data-bs-backdrop="static" data-bs-keyboard="false" tabIndex={-1} aria-labelledby={`staticBackdropLabel${index}`} aria-hidden="true">
+        <img className='my-btn' data-bs-toggle="modal" data-bs-target={`#staticBackdro${index}`} src="/img/btn-view.png" alt="" />
+        <div className="modal fade" id={`staticBackdro${index}`} data-bs-backdrop="static" data-bs-keyboard="false" tabIndex={-1} aria-labelledby={`staticBackdropLabel${index}`} aria-hidden="true">
             <div className="modal-dialog">
                 <div className="modal-content">
                 <div className="modal-header">
-                    <h1 className="modal-title fs-5" id={`staticBackdropLabel${index}`}>Eliminar Paciente</h1>
+                    <h1 className="modal-title fs-5" id={`staticBackdroLabel${index}`}>Datos del Paciente</h1>
                     <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div className="modal-body">
@@ -67,12 +62,19 @@ const DeletePacient:React.FC<DeletePacientProps>=({pacient,index})=>{
                             </div>
                             <p className="mb-1">{pacient.historia}</p>
                         </a>
+                        <a href="#" className="list-group-item list-group-item-action">
+                            <div className="d-flex w-100 justify-content-between">
+                            <h5 className="mb-1">Fecha de Creacion</h5>
+
+                            </div>
+                            <p className="mb-1">{formatDate(pacient.fechaCreacion)}</p>
+                        </a>
                     </div>
 
                     </div>
                     <div className="modal-footer">
                         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" onClick={()=>DeletePacient(pacient.dni)} data-bs-dismiss="modal" className="btn btn-primary">Eliminar</button>
+                        
                     </div>
                 </div>
             </div>
@@ -83,4 +85,4 @@ const DeletePacient:React.FC<DeletePacientProps>=({pacient,index})=>{
     );
 }
 
-export default DeletePacient;
+export default ViewPacient;

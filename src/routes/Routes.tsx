@@ -48,7 +48,7 @@ export const routes: RouteType[] = [
     isPrivate: true,
   },
   {
-    path: "/patients/update",
+    path: `/patients/update/:dni`,
     element: UpdatePacient,
     isPrivate: true,
   },

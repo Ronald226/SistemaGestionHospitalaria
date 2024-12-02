@@ -3,6 +3,8 @@ import React,{ useState, useEffect } from "react";
 import {list_pacient } from "../../services/Pacients/Pacients"
 import { useNavigate } from 'react-router-dom';
 import ControlsModuls from '../layaout/ControlsModuls';
+import DeletePacient from './DeletePacient';
+import ViewPacient from './ViewPacient';
 
 const ListPacient: React.FC = ()=>{
     const [msg, setText] = useState<string>("Cargando datos...");
@@ -47,9 +49,10 @@ interface Tabla_list_pacient_props{
 
 const Tabla_list_pacients:React.FC<Tabla_list_pacient_props>=({pacients,msg})=>{
     const navigate = useNavigate();
-    const updatePacient=()=>{
-        navigate("/patients/update")
+    const updatePacient=(dni:number)=>{
+        navigate(`/patients/update/${dni}`);
     }
+    console.log("Datos de la Vista"+pacients)
     return (
         <>
             <div className='list-content'>
@@ -82,8 +85,10 @@ const Tabla_list_pacients:React.FC<Tabla_list_pacient_props>=({pacients,msg})=>{
                                             {pacient.historia}
                                         </td>
                                         <td>
-                                            <img className='my-btn' onClick={updatePacient} src="/img/btn-update.png" alt="" />
-                                            <img className='my-btn' onClick={updatePacient} src="/img/btn-delete.png" alt="" />
+                                            <img className='my-btn' onClick={()=>updatePacient(pacient.dni)} src="/img/btn-update.png" alt="" />
+                                            <ViewPacient pacient={pacient} index={index}></ViewPacient>   
+                                            <DeletePacient pacient={pacient} index={index}></DeletePacient>
+                                        
                                         </td>
                                     </tr>
                                 ))}
