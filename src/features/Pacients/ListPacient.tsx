@@ -6,10 +6,12 @@ import ControlsModuls from '../layaout/ControlsModuls';
 import DeletePacient from './DeletePacient';
 import ViewPacient from './ViewPacient';
 
-const ListPacient: React.FC = ()=>{
+const [RefreshList,setRefreshList] = useState<number>(1);
+const ListPacient: React.FC = () => {
     const [msg, setText] = useState<string>("Cargando datos...");
     const [pacients, setPacients] = useState<any[]>([]); // Almacena la lista de pacientes
     
+
    
     // Función para obtener la lista de pacientes
     const fetchPacients = async () => {
@@ -29,7 +31,7 @@ const ListPacient: React.FC = ()=>{
     // Llama a fetchPacients al montar el componente
     useEffect(() => {
         fetchPacients();
-    }, []);
+    }, [RefreshList]);
 
     return (
        <>
@@ -37,14 +39,15 @@ const ListPacient: React.FC = ()=>{
             {/* Formulario principal */}
             <main className='main'>
                 
-                <Tabla_list_pacients pacients={pacients} msg={msg}></Tabla_list_pacients>
+                <Tabla_list_pacients pacients={pacients} msg={msg} ></Tabla_list_pacients>
             </main>
         </>
     )
 }
 interface Tabla_list_pacient_props{
     pacients:any,
-    msg:string
+    msg:string,
+   
 }
 
 const Tabla_list_pacients:React.FC<Tabla_list_pacient_props>=({pacients,msg})=>{
@@ -87,7 +90,7 @@ const Tabla_list_pacients:React.FC<Tabla_list_pacient_props>=({pacients,msg})=>{
                                         <td>
                                             <img className='my-btn' onClick={()=>updatePacient(pacient.dni)} src="/img/btn-update.png" alt="" />
                                             <ViewPacient pacient={pacient} index={index}></ViewPacient>   
-                                            <DeletePacient pacient={pacient} index={index}></DeletePacient>
+                                            <DeletePacient pacient={pacient} index={index} RefreshList={RefreshList} setRefreshList={setRefreshList}></DeletePacient>
                                         
                                         </td>
                                     </tr>

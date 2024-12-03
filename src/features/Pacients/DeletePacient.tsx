@@ -1,7 +1,8 @@
 import { delete_pacient } from "../../services/Pacients/Pacients"
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import "./DeletePacient.css"
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import { useEffect } from "react";
 interface DeletePacientProps{
     pacient: {
         dni:number,
@@ -9,18 +10,22 @@ interface DeletePacientProps{
         apellidos:string,
         historia:number,
     },
-    index:number
+    index:number,
+    RefreshList:number,
+    setRefreshList:React.Dispatch<React.SetStateAction<number>>;
 }
-const DeletePacient:React.FC<DeletePacientProps>=({pacient,index})=>{
+const DeletePacient:React.FC<DeletePacientProps>=({pacient,index,RefreshList,setRefreshList})=>{
     console.log(pacient)
-    const navigate = useNavigate();
     const DeletePacient= async (dni:number)=>{
         const res=await delete_pacient(dni);
     
         if(res){
             console.log("Paciente Eliminado");
-            
-            setTimeout(() => navigate('/patients'), 300);
+            const modal=document.getElementById(`staticBackdrop${index}`);
+            modal?.classList.remove('show');
+            // Actualiza la lista invocando el setter
+            setRefreshList((prev) => prev + 1); // Incrementa el contador
+
         }else{
             console.log("No se pudo eliminar Paciente")
         }
