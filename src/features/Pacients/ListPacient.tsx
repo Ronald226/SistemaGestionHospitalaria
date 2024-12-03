@@ -6,7 +6,9 @@ import ControlsModuls from '../layaout/ControlsModuls';
 import DeletePacient from './DeletePacient';
 import ViewPacient from './ViewPacient';
 
-const [RefreshList,setRefreshList] = useState<number>(1);
+// const [
+// RefreshList,setRefreshList] = useState<number>(0);
+
 const ListPacient: React.FC = () => {
     const [msg, setText] = useState<string>("Cargando datos...");
     const [pacients, setPacients] = useState<any[]>([]); // Almacena la lista de pacientes
@@ -31,7 +33,7 @@ const ListPacient: React.FC = () => {
     // Llama a fetchPacients al montar el componente
     useEffect(() => {
         fetchPacients();
-    }, [RefreshList]);
+    }, []);
 
     return (
        <>
@@ -90,7 +92,7 @@ const Tabla_list_pacients:React.FC<Tabla_list_pacient_props>=({pacients,msg})=>{
                                         <td>
                                             <img className='my-btn' onClick={()=>updatePacient(pacient.dni)} src="/img/btn-update.png" alt="" />
                                             <ViewPacient pacient={pacient} index={index}></ViewPacient>   
-                                            <DeletePacient pacient={pacient} index={index} RefreshList={RefreshList} setRefreshList={setRefreshList}></DeletePacient>
+                                            {/* <DeletePacient pacient={pacient} index={index} RefreshList={RefreshList} setRefreshList={setRefreshList}></DeletePacient> */}
                                         
                                         </td>
                                     </tr>
