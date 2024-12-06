@@ -1,8 +1,7 @@
 import { delete_pacient } from "../../services/Pacients/Pacients"
-import { useNavigate } from 'react-router-dom';
 import "./DeletePacient.css"
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-import { useEffect } from "react";
+
 interface DeletePacientProps{
     pacient: {
         dni:number,
@@ -11,21 +10,19 @@ interface DeletePacientProps{
         historia:number,
     },
     index:number,
-    RefreshList:number,
     setRefreshList:React.Dispatch<React.SetStateAction<number>>;
 }
-const DeletePacient:React.FC<DeletePacientProps>=({pacient,index,RefreshList,setRefreshList})=>{
+const DeletePacient:React.FC<DeletePacientProps>=({pacient,index,setRefreshList})=>{
     console.log(pacient)
     const DeletePacient= async (dni:number)=>{
         const res=await delete_pacient(dni);
     
         if(res){
             console.log("Paciente Eliminado");
-            const modal=document.getElementById(`staticBackdrop${index}`);
-            modal?.classList.remove('show');
             // Actualiza la lista invocando el setter
             setRefreshList((prev) => prev + 1); // Incrementa el contador
-
+            console.log(setRefreshList)
+            
         }else{
             console.log("No se pudo eliminar Paciente")
         }
@@ -34,7 +31,8 @@ const DeletePacient:React.FC<DeletePacientProps>=({pacient,index,RefreshList,set
     return (
         <>
         <img className='my-btn' data-bs-toggle="modal" data-bs-target={`#staticBackdrop${index}`} src="/img/btn-delete.png" alt="" />
-        <div className="modal fade" id={`staticBackdrop${index}`} data-bs-backdrop="static" data-bs-keyboard="false" tabIndex={-1} aria-labelledby={`staticBackdropLabel${index}`} aria-hidden="true">
+
+        <div className="modal fade" id={`staticBackdrop${index}`} data-bs-backdrop="static" data-bs-keyboard="false" tabIndex={-1} aria-labelledby={`staticBackdropLabel${index}`} >
             <div className="modal-dialog">
                 <div className="modal-content">
                 <div className="modal-header">
@@ -82,7 +80,6 @@ const DeletePacient:React.FC<DeletePacientProps>=({pacient,index,RefreshList,set
                 </div>
             </div>
         </div>
-        
         
         </>
     );

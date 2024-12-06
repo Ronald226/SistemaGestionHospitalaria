@@ -6,8 +6,8 @@ export const register_pacient= async (dn:number,nomb:String,ape:String,hist:numb
     try {
         const respon:any = await axiosInstance.post('/pacientes',{
             dni: dni,
-            nombres: nomb,
-            apellidos: ape,
+            nombres: String(nomb),
+            apellidos: String(ape),
             historia: historia,
         });
         if (respon.status === 200 || respon.status === 201) {
@@ -52,7 +52,11 @@ export const update_pacient= async (dn:number,nomb:String,ape:String,hist:number
 }
 
 export const delete_pacient= async (dn:number):Promise<boolean>=>{
+    if(String(dn).length<8 ){
+        return false
+    }
     const dni = parseInt(String(dn), 10);
+    
     try {
         const respon:any = await axiosInstance.delete(`/pacientes/${dni}`);
         if (respon.status === 200 || respon.status === 201) {
@@ -103,6 +107,33 @@ export const pacient_search_dni= async (dni:number)=>{
 
 
     }catch (error) {
+        console.error("Error en la solicitud:", error);
+        return null;
+    }
+}
+export const pacient_search_name= async (nombres:String|undefined,apellidos:String|undefined)=>{
+    try{
+        const params: { nombres?: String; apellidos?: String } = {};
+        
+        if (nombres) params.nombres = nombres;
+        if (apellidos) params.apellidos = apellidos;
+
+        if (Object.keys(params).length === 0) {
+            // throw new Error("Debes proporcionar al menos un parámetro de búsqueda (nombres o apellidos).");
+            return null;
+        }
+        console.log(params)
+        const respon:any = await axiosInstance.get('/pacientes/search',{params});
+
+        if (respon.status === 200 || respon.status === 201) {
+            console.log("Consulta exitosa:", respon.data);
+            return respon.data; // Retorna los datos de la respuesta si es necesario
+        } else {
+            console.log("Consulta fallido:", respon.status);
+            return null;
+        }
+
+    }catch(error){
         console.error("Error en la solicitud:", error);
         return null;
     }

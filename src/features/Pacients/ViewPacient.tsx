@@ -24,7 +24,7 @@ const ViewPacient:React.FC<DeletePacientProps>=({pacient,index})=>{
     return (
         <>
         <img className='my-btn' data-bs-toggle="modal" data-bs-target={`#staticBackdro${index}`} src="/img/btn-view.png" alt="" />
-        <div className="modal fade" id={`staticBackdro${index}`} data-bs-backdrop="static" data-bs-keyboard="false" tabIndex={-1} aria-labelledby={`staticBackdropLabel${index}`} aria-hidden="true">
+        <div className="modal fade" id={`staticBackdro${index}`} data-bs-backdrop="static" data-bs-keyboard="false" tabIndex={-1} aria-labelledby={`staticBackdropLabel${index}`} >
             <div className="modal-dialog">
                 <div className="modal-content">
                 <div className="modal-header">

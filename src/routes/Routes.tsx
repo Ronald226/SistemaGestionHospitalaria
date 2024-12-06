@@ -3,7 +3,7 @@ import RecoverPassword from "../features/Auth/RecoverPassword";
 import SetNewPassword from "../features/Auth/SetNewPassword";
 import Dashboard from "../features/Dashboard/Dashboard";
 import Home from "../features/Home/Home";
-import ListPacient from "../features/Pacients/ListPacient";
+import {ListPacient} from "../features/Pacients/ListPacient";
 import SearchPacient from "../features/Pacients/SearchPacient";
 import UpdatePacient from "../features/Pacients/UpdatePacient";
 import NewPacient from "../features/Pacients/NewPacient";
