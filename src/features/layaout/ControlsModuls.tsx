@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 const ControlsModuls = ()=>{
     return(
         <>
-            <nav className='controls'>
+            <nav className='controls mt-3'>
                 <Link to="/patients">
                     <img src="/img/pacient-icon1.png" alt="" />
                     <span>Pacientes</span>

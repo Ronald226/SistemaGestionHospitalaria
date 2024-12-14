@@ -1,14 +1,16 @@
 import { useSesion } from "../../context/SesionContext";
 
 const useStoreSesion=()=>{
-    const { setSesion, setToken, isToken,isSesion } = useSesion();
+    const { setSesion, setToken, isToken,isSesion,isRol,setRol,isName,setName } = useSesion();
     const destroyToken=()=>{
         setSesion(false);
         setToken("");
     }
-    const startToken=(tok:string)=>{
+    const startToken=(tok:string,rol:string,name:string)=>{
         setSesion(true);
         setToken(tok);
+        setRol(rol);
+        setName(name);
     }
     const getTok=()=>{
         return isToken;
@@ -16,7 +18,13 @@ const useStoreSesion=()=>{
     const getSes=()=>{
         return isSesion;
     }
-    return {destroyToken, getTok, startToken,getSes};
+    const getRol=()=>{
+        return isRol;
+    }
+    const getName=()=>{
+        return isName;
+    }
+    return {destroyToken, getTok, startToken,getSes,getRol,getName};
 };
 
 export default useStoreSesion;

@@ -19,15 +19,20 @@ body{
   display: flex;
   flex: 1;
   width: 100%;
-  height: 100%;
+  min-height: 670px;
 }
 
 .sidebar-container{
-  flex-basis:200px;
+  width: 200px;
   background: rgba(255,255,255,0.6);
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+  transition: all 1.2s;
+}
+.sidebar-container.shrink{
+  width: 100px;
 }
 .main-container{
   padding: 0 20px;
@@ -71,7 +76,7 @@ h2{
 }
 
 .my-btn{
-  width: 50px;
+  width: 40px;
   padding: 0 !important;
   border: none;
 }
@@ -168,13 +173,44 @@ h2{
   .sidebar-container{
     flex-basis:100px;
   }
+  .menu-user li a span{
+    display: none;
+  }
+  .name{
+    font-size: 12px !important;
+  }
+  .rol{
+    font-size: 12px !important;
+    width: 80% !important;
+  }
 }
 @media (max-width: 900px) {
   #root{
     flex-direction: column;
   }
   .sidebar-container{
-    height: 100px;
+    height: 170px;
+    width: 100%;
+    flex-direction: row;
+  }
+  .content-menu-user{
+    flex-direction: row !important;
+    margin: 0 !important;
+  }
+  .content-show-menu{
+    justify-content: start !important;
+  }
+  .menu-user{
+    position: relative;
+    flex-direction: row !important;
+    left: 40px;
+    top: -60px !important;
+  }
+  .menu-user li{
+    margin: 0 40px;
+  }
+  .sidebar-container.shrink{
+    width: 100% !important;
   }
 }
 @media (max-width: 600px) {

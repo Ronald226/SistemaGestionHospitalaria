@@ -10,7 +10,7 @@ interface ILoginForm {
     password: string;
 }
 
-const LoginPage:React.FC = () => {
+const LoginPage:React.FC = () =>{
 
     const {register, handleSubmit, formState: { errors } } = useForm<ILoginForm>();
     const { startToken, getTok  } = useStoreSesion();
@@ -35,7 +35,8 @@ const LoginPage:React.FC = () => {
             console.log("exito");
             // const user = { email: data_user.email, token: data_user.token };
             // localStorage.setItem('usuario', JSON.stringify(user));
-            startToken(data_user.token);
+            
+            startToken(data_user.token,data_user.role,"Juan");
             console.log(getTok())
             navigate(`/patients`);
         }else{
