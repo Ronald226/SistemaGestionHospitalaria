@@ -138,3 +138,4 @@ export const pacient_search_name= async (nombres:String|undefined,apellidos:Stri
         return null;
     }
 }
+

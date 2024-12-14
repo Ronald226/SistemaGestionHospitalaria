@@ -45,9 +45,10 @@ const LoginPage:React.FC = () => {
     };
     
     return (
-        <div className='content-form'>
-            <div>   
-                <form onSubmit={handleSubmit(onSubmit)}>
+        
+            
+            <div className='content-login'>
+                <form className='login' onSubmit={handleSubmit(onSubmit)}>
                     <img src="/img/user-icon.png" alt="user" className='user-icon' />
                     <p className='error-form'>{msg}</p>
                     <div>
@@ -81,8 +82,7 @@ const LoginPage:React.FC = () => {
                     <span><a onClick={ChangePassword}>¿Has Olvidado tu contraseña?</a></span>
                 </form>
             </div>
-        </div>
-        
+            
     );
 };
 

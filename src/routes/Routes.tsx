@@ -7,6 +7,8 @@ import {ListPacient} from "../features/Pacients/ListPacient";
 import SearchPacient from "../features/Pacients/SearchPacient";
 import UpdatePacient from "../features/Pacients/UpdatePacient";
 import NewPacient from "../features/Pacients/NewPacient";
+import { ListAtenciones } from "../features/Atenciones/ListAtenciones";
+import NewAtenciones from "../features/Atenciones/NewAtenciones";
 
 interface RouteType {
   path: string;
@@ -55,6 +57,16 @@ export const routes: RouteType[] = [
   {
     path: "/patients/search",
     element: SearchPacient,
+    isPrivate: true,
+  },
+  {
+    path: "/atenciones",
+    element: ListAtenciones,
+    isPrivate: true,
+  },
+  {
+    path: "/atenciones/nuevo",
+    element: NewAtenciones,
     isPrivate: true,
   },
 ];

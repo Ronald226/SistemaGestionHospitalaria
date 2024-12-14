@@ -4,7 +4,9 @@ interface SesionContextProps{
   isSesion: boolean;
   setSesion: (load: boolean) => void;
   isToken: string;
-  setToken:(tok:string)=>void
+  setToken:(tok:string)=>void;
+  isRol: string;
+  setRol:(rol: string)=>void;
 }
 
 
@@ -15,12 +17,14 @@ interface SesionContextProps{
 //     setToken: ()=>{},
 // });
 const Sesion = createContext<SesionContextProps | null>(null);
+
 const SesionProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [isSesion, setSesion] = useState<boolean>(false);
     const [isToken, setToken] = useState<string>("");
+    const [isRol,setRol]=useState<string>("");
 
     return (
-        <Sesion.Provider value={{ isSesion, setSesion, isToken, setToken }}>
+        <Sesion.Provider value={{ isSesion, setSesion, isToken, setToken,isRol,setRol}}>
             {children}
         </Sesion.Provider>
     );

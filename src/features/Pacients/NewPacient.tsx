@@ -20,7 +20,7 @@ const NewPacient: React.FC = ()=>{
             
         <main className="main">
             <div className='list-content'>
-                <h2>Registro de Nuevo Paciente</h2>
+                <h2 className="titulos-seccion">Registro de Nuevo Paciente</h2>
                 <section className="section no-scroll">
                     <Formulario_new_pacients msg={msgNew} ></Formulario_new_pacients>
                 </section>

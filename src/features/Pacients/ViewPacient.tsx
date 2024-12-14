@@ -1,5 +1,5 @@
 
-interface DeletePacientProps{
+interface ViewPacientProps{
     pacient: {
         dni:number,
         nombres:string,
@@ -9,7 +9,7 @@ interface DeletePacientProps{
     },
     index:number
 }
-const ViewPacient:React.FC<DeletePacientProps>=({pacient,index})=>{
+const ViewPacient:React.FC<ViewPacientProps>=({pacient,index})=>{
     console.log(pacient)
     const formatDate = (isoDate: string): string => {
         const date = new Date(isoDate);
