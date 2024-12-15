@@ -1,14 +1,21 @@
-/* form{
-    width: 350px;
-    height: 350px;
+.content-login{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.login{
+    width: 380px;
+    height: 400px;
     background: #FDF9FA;
     border-radius: 15%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    align-self: center;
 }
 
-form .user-icon{
+.login .user-icon{
     width: 8%;
     min-width: 28px;
     max-height: 40px;
@@ -16,18 +23,18 @@ form .user-icon{
     margin-bottom: 5%;
 }
 
-form div{
+.login div{
     display: flex;
     flex-direction: column;
     width: 70%;
     margin-top: 5%;
 }
-form div label{
+.login div label{
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     text-transform: capitalize;
     color: rgba(38, 33, 70,0.8);
 }
-form div input{
+.login div input{
     background: none;
     outline: none;
     border: none;
@@ -35,7 +42,7 @@ form div input{
     margin-top: 2%;
     box-sizing: content-box;
 }
-form div p{
+.login div p{
     margin-top: 1%;
     color: rgba(38, 33, 70,0.8);
     font-size: 10px;
@@ -45,7 +52,7 @@ form div p{
     color: red;
     text-align: center;
 }
-form button{
+.login button{
     margin-top: 8%;
     outline: none;
     border: none;
@@ -54,15 +61,15 @@ form button{
     padding:6px 20px;
     margin-bottom: 4%;
 }
-form button:hover{
+.login button:hover{
     cursor: pointer;
 }
-form span a{
+.login span a{
     font-size: 12px;
     text-decoration: none;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     color: rgba(38, 33, 70,0.8);
 }
-form span a:hover{
+.login span a:hover{
     cursor: pointer;
-} */
+}

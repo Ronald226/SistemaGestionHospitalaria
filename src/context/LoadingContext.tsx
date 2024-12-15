@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState, ReactNode } from "react";
 
 interface LoadingContextProps {
   isLoading: boolean;
-  setLoading: (loading: boolean) => void;
+  setLoading: (loading: boolean)=> void;
 }
 
 const LoadingContext = createContext<LoadingContextProps | undefined>(undefined);

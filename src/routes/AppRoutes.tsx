@@ -27,10 +27,10 @@ const PrivateRoute:React.FC<PrivateRouteProps> =({ children, authToken }) => {
 
 const routes_element = (authToken: any ):React.ReactElement =>{
     let routes_element:any;
-    const {getSes}= useStoreSesion();
+    const {getSes,getRol}= useStoreSesion();
     const pri= getSes();
     routes_element=routes.map((routes,key)=>{
-        const { element, path, isPrivate } = routes;
+        const { element, path, isPrivate, user } = routes;
                 const Element = element;
         
         return (
@@ -41,7 +41,7 @@ const routes_element = (authToken: any ):React.ReactElement =>{
                 element={
                     isPrivate ? (
                         <PrivateRoute authToken={authToken}>
-                            <Maquetado sesion={pri}>
+                            <Maquetado sesion={pri} rol={getRol()} user={user}>
                                 <Element />
                             </Maquetado>
                             
@@ -61,12 +61,21 @@ const routes_element = (authToken: any ):React.ReactElement =>{
 interface Estructura{
     children: React.ReactNode
     sesion:boolean
+    rol:string
+    user:string[]
 }
-const Maquetado:React.FC<Estructura>=({children,sesion})=>{
+const Maquetado:React.FC<Estructura>=({children,sesion,rol, user})=>{
+    const valido = ()=>{
+        const all=user.includes("all")
+        if(all)
+            return true
+        return user.includes(rol)
+    }
+    
     return (
         <>
             
-                <div className="sidebar-container">
+                <div id="sidebar-container" className="sidebar-container">
                     <SidebarMenu></SidebarMenu>
                 </div>
                 
@@ -75,7 +84,7 @@ const Maquetado:React.FC<Estructura>=({children,sesion})=>{
                         <TopHeader></TopHeader>
                     </header>
                     
-                    {children}
+                    {valido()?children:<p>Tu cuenta es {rol}. No tienes Permiso</p>}
                 </div>
             
         </>

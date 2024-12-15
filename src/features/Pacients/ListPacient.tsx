@@ -61,17 +61,17 @@ export const Tabla_list_pacients:React.FC<Tabla_list_pacient_props>=({pacients,m
     return (
         <>
             <div className='list-content'>
-                        <h2>Lista de Pacientes</h2>
+                        <h2 className='titulos-seccion '>Lista de Pacientes</h2>
                         {msg && <p>{msg}</p>} {/* Muestra mensajes si existen */}
                         <section className='section'>
-                        <table className='table  text-center tabla'>
-                            <thead className='table-dark mt-2'>
+                        <table className='table text-center tabla  mt-2'>
+                            <thead className='table-light'>
                                 <tr>
-                                    <th scope="col">Nombres</th>
-                                    <th scope="col">Apellidos</th>
-                                    <th scope="col">DNI</th>
-                                    <th scope="col">N° Historia</th>
-                                    <th scope="col">Acciones</th>
+                                    <th className="text-black-50 fw-light" scope="col">Nombres</th>
+                                    <th className="text-black-50 fw-light" scope="col">Apellidos</th>
+                                    <th className="text-black-50 fw-light" scope="col">DNI</th>
+                                    <th className="text-black-50 fw-light" scope="col">N° Historia</th>
+                                    <th className="text-black-50 fw-light" scope="col">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -130,15 +130,28 @@ export const Tabla_list_pacients:React.FC<Tabla_list_pacient_props>=({pacients,m
                         </table>
                         
                         </section>
-                        <nav className='content-paginacion'>
-                                <ul>
+                        <div className='content-paginacion-s'>
+                                {/* <ul>
                                     <li>&#60;</li>
                                     <li>1</li>
                                     <li>2</li>
                                     <li>3</li>
                                     <li>&#62;</li>
-                                </ul>
-                        </nav>
+                                </ul> */}
+                                <nav aria-label="Page navigation example">
+                                    <ul className="pagination justify-content-center">
+                                        <li className="page-item disabled">
+                                        <a className="page-link" href="#" tabIndex={-1}>Previous</a>
+                                        </li>
+                                        <li className="page-item"><a className="page-link" href="#">1</a></li>
+                                        <li className="page-item"><a className="page-link" href="#">2</a></li>
+                                        <li className="page-item"><a className="page-link" href="#">3</a></li>
+                                        <li className="page-item">
+                                        <a className="page-link" href="#">Next</a>
+                                        </li>
+                                    </ul>
+                                </nav> 
+                        </div>
             </div>
         </>
     )
@@ -157,17 +170,17 @@ export const Tabla_list_pacients_all_modal:React.FC<Tabla_list_pacient_modal_pro
     return (
         <>
             <div className='list-content'>
-                        <h2>Lista de Pacientes</h2>
+                        <h2 className='titulos-seccion'>Lista de Pacientes</h2>
                         {msg && <p>{msg}</p>} {/* Muestra mensajes si existen */}
                         <section className='section'>
-                        <table className='table  text-center tabla'>
-                            <thead className='table-dark mt-2'>
+                        <table className='table text-center tabla  mt-2'>
+                            <thead className='table-light'>
                                 <tr>
-                                    <th scope="col">Nombres</th>
-                                    <th scope="col">Apellidos</th>
-                                    <th scope="col">DNI</th>
-                                    <th scope="col">N° Historia</th>
-                                    <th scope="col">Acciones</th>
+                                    <th className="text-black-50 fw-light" scope="col">Nombres</th>
+                                    <th className="text-black-50 fw-light" scope="col">Apellidos</th>
+                                    <th className="text-black-50 fw-light" scope="col">DNI</th>
+                                    <th className="text-black-50 fw-light" scope="col">N° Historia</th>
+                                    <th className="text-black-50 fw-light" scope="col">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -227,15 +240,28 @@ export const Tabla_list_pacients_all_modal:React.FC<Tabla_list_pacient_modal_pro
                         </table>
                         
                         </section>
-                        <nav className='content-paginacion'>
-                                <ul>
+                        <div className='content-paginacion-s'>
+                                {/* <ul>
                                     <li>&#60;</li>
                                     <li>1</li>
                                     <li>2</li>
                                     <li>3</li>
                                     <li>&#62;</li>
+                                </ul> */}
+                            <nav aria-label="Page navigation example">
+                                <ul className="pagination justify-content-center">
+                                    <li className="page-item disabled">
+                                    <a className="page-link" href="#" tabIndex={-1}>Previous</a>
+                                    </li>
+                                    <li className="page-item"><a className="page-link" href="#">1</a></li>
+                                    <li className="page-item"><a className="page-link" href="#">2</a></li>
+                                    <li className="page-item"><a className="page-link" href="#">3</a></li>
+                                    <li className="page-item">
+                                    <a className="page-link" href="#">Next</a>
+                                    </li>
                                 </ul>
-                        </nav>
+                            </nav>  
+                        </div>
             </div>
         </>
     )
