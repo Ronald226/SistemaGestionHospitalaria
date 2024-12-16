@@ -7,7 +7,7 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import { Tabla_list_pacients,Tabla_list_pacients_all_modal } from './ListPacient';
 import { useLocation } from "react-router-dom";
 import { pacientsProps } from './InterfacePacients';
-import ControlsModuls from '../layaout/ControlsModuls';
+import {ControlsModuls} from '../layaout/ControlsModuls';
 
 // Tipos de las props
 interface Option {

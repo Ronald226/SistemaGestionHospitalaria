@@ -1,5 +1,5 @@
 import React,{ useState, useEffect } from "react";
-import ControlsModuls from '../layaout/ControlsModuls';
+import {ControlsModuls} from '../layaout/ControlsModuls';
 import { Atenciones } from "./InterfaceAtenciones";
 import {list_atenciones} from "./../../services/Atenciones/Atenciones";
 import { formatDate } from "./FormatAtencion";
@@ -31,7 +31,7 @@ export const ListAtenciones:React.FC=() => {
         <>
             <ControlsModuls></ControlsModuls>
             <main className='main'>
-            <Tabla_list_atenciones atenciones={atenciones} msg={msg} setRefreshList={setRefreshList} from={"atenciones/"}></Tabla_list_atenciones>
+            <Tabla_list_atenciones  atenciones={atenciones} msg={msg} setRefreshList={setRefreshList} from={"atenciones/"}></Tabla_list_atenciones>
             </main>
         </>
     )
@@ -42,10 +42,11 @@ interface Tabla_list_atenciones_props{
     msg:String,
     setRefreshList: React.Dispatch<React.SetStateAction<number>>, // Mejora en el tipo
     from:string|null
+   
 }
 
-export const Tabla_list_atenciones:React.FC<Tabla_list_atenciones_props>=({atenciones,msg,setRefreshList,from})=>{
-    
+export const Tabla_list_atenciones:React.FC<Tabla_list_atenciones_props>=({atenciones,msg,setRefreshList,from}) =>{
+   
     console.log(atenciones)
     return (
         <>
@@ -86,7 +87,7 @@ export const Tabla_list_atenciones:React.FC<Tabla_list_atenciones_props>=({atenc
                                                     {atencion.doctor.nombre+" "+atencion.doctor.apellido}
                                                 </td>
                                                 <td>
-                                                    {atencion.especialidad}
+                                                    {atencion.doctor.especialidad.id}
                                                 </td>
                                                 <td>
                                                     {formatDate(atencion.fecha)}
@@ -96,9 +97,10 @@ export const Tabla_list_atenciones:React.FC<Tabla_list_atenciones_props>=({atenc
                                                 </td>
                                                 <td>
                                                     
-                                                    <UpdateAtenciones atencion={atencion} index={index} setRefreshList={setRefreshList}></UpdateAtenciones>
-                                                    <ViewAtencion atencion={atencion} index={index}></ViewAtencion>   
-                                                    <DeleteAtenciones atencion={atencion} index={index} setRefreshList={setRefreshList}></DeleteAtenciones>
+                                                <UpdateAtenciones atencion={atencion} index={index} setRefreshList={setRefreshList}></UpdateAtenciones>
+                                                <ViewAtencion atencion={atencion} index={index}></ViewAtencion>   
+                                                <DeleteAtenciones atencion={atencion} index={index} setRefreshList={setRefreshList}></DeleteAtenciones>
+          
                                                 
                                                 </td>
                                             </tr>
@@ -118,7 +120,7 @@ export const Tabla_list_atenciones:React.FC<Tabla_list_atenciones_props>=({atenc
                                                 {atenciones.doctor.nombre+" "+atenciones.doctor.apellido}
                                             </td>
                                             <td>
-                                                {atenciones.especialidad}
+                                                {atenciones.doctor.especialidad.id}
                                             </td>
                                             <td>
                                                 {formatDate(atenciones.fecha)}

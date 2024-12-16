@@ -11,7 +11,6 @@ export const list_atenciones= async ()=> {
             return null;
           }
 
-
     }catch (error) {
         console.error("Error en la solicitud:", error);
         return null;
@@ -27,10 +26,11 @@ export const update_atenciones= async (hist:number,fec:String,docId:number,espId
           historia: historia,
           fecha: fec,
           doctorId: doctorId,
-          especialidadId: especialidadId,
-          estado: est
+          estado: est,
       });
-      if (respon.status === 200 || respon.status === 201) {
+      const responesp:any = await update_doctores(doctorId,especialidadId);
+
+      if ((respon.status === 200 || respon.status === 201) && responesp) {
           console.log("Actualizacion exitosa:", respon.data);
           return true; // Retorna los datos de la respuesta si es necesario
         } else {
@@ -45,7 +45,24 @@ export const update_atenciones= async (hist:number,fec:String,docId:number,espId
   }
   
 }
-
+export const update_doctores= async (docId:number,espId:number)=>{
+  const especialidadId=parseInt(String(espId))
+  try {
+    const respon:any = await axiosInstance.patch(`/doctores/${docId}`,{
+        especialidadId: especialidadId,
+    });
+    if (respon.status === 200 || respon.status === 201) {
+        console.log("Actualizacion exitosa:", respon.data);
+        return true; // Retorna los datos de la respuesta si es necesario
+      } else {
+        console.log("Actualizacion fallida:", respon.status);
+        return false;
+      }
+  }catch (error) {
+      console.error("Error en la solicitud:", error);
+      return false;
+  }
+}
 export const get_doctores= async ()=> {
   try {
       const respon:any = await axiosInstance.get('/doctores');

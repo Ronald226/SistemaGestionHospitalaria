@@ -1,6 +1,6 @@
 import './ControlsModuls.css'
 import { Link } from 'react-router-dom'
-const ControlsModuls = ()=>{
+export const ControlsModuls = ()=>{
     return(
         <>
             <nav className='controls mt-3'>
@@ -30,4 +30,35 @@ const ControlsModuls = ()=>{
         </>
     )
 }
-export default ControlsModuls
+export const ControlsModulsFarmacia = ()=>{
+    return(
+        <>
+            <nav className='controls mt-3'>
+                <Link to="/farmacia">
+                    <img src="/img/pacient-icon1.png" alt="" />
+                    <span>Farmacia</span>
+                </Link>
+                <Link to="/farmacia">
+                    <img src="/img/pacient-icon1.png" alt="" />
+                    <span>Nuevo Farmaco</span>
+                </Link>
+            </nav>
+        </>
+    )
+}
+export const ControlsModulsAdministracion = ()=>{
+    return(
+        <>
+            <nav className='controls mt-3'>
+                <Link to="/administracion">
+                    <img src="/img/pacient-icon1.png" alt="" />
+                    <span>Usuarios</span>
+                </Link>
+                <Link to="/administracion">
+                    <img src="/img/pacient-icon1.png" alt="" />
+                    <span>Nuevo Usuario</span>
+                </Link>
+            </nav>
+        </>
+    )
+}
