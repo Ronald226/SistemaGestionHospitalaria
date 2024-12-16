@@ -33,6 +33,8 @@ export const UpdateAtenciones:React.FC<UpdateAtencionesProps> =({atencion,index,
     const [valorDoctor,setValorDoctor]=useState<number>(atencion.doctor.id);
     const [valorEspecialidades,setValorEspecialidades] = useState<number>(atencion.doctor.especialidad.id);
 
+    const [valorNombre,setValorNombre]=useState<string>(atencion.paciente.nombres);
+
     const inicialEstado=(index:number)=>{
         const btn:any=document.getElementById(`updateestado${index}`)
         btn.classList.replace(btn.className,atencion.estado ? "pasado" : "pendiente")
@@ -162,7 +164,7 @@ export const UpdateAtenciones:React.FC<UpdateAtencionesProps> =({atencion,index,
                                 <div className="row shadow-lg p-3 mb-2 mx-1 bg-body rounded">
                                     <div className="col">
                                         <label htmlFor={`atencionupdatenombres${atencion.id}`} className="form-label fw-bold text-dorian-light">Nombres</label>
-                                        <input readOnly defaultValue={atencion.paciente.nombres} id={`atencionupdatenombres${atencion.id}`} type="text" className="form-control"/>
+                                        <input readOnly defaultValue={valorNombre} id={`atencionupdatenombres${atencion.id}`} type="text" className="form-control"/>
                                     </div>
                                     <div className="col">
                                     <label htmlFor={`atencionupdateapellidos${atencion.id}`} className="form-label fw-bold text-dorian-light">Apellidos</label>
@@ -207,10 +209,10 @@ export const UpdateAtenciones:React.FC<UpdateAtencionesProps> =({atencion,index,
                                 </div>
                                 <div className="row shadow-lg p-3 mb-2 mx-1 bg-body rounded">
                                     <div className="col">
-                                        <label htmlFor={`atencionupdateespecialidad${atencion.doctor.especialidad.id}`} className="form-label fw-bold text-dorian-light">Especialidad</label> 
+                                        <label htmlFor={`atencionupdateespecialidad${atencion.id}`} className="form-label fw-bold text-dorian-light">Especialidad</label> 
                                         {/* <input defaultValue={atencion.especialidad} id={`atencionespecialidad${index}`} type="text" className="form-control" /> */}
                                         
-                                        <OptionEspecialidad id={atencion.doctor.especialidad.id} iden={`atencionupdateespecialidad${atencion.doctor.especialidad.id}`}></OptionEspecialidad>
+                                        <OptionEspecialidad id={atencion.id} iden={`atencionupdateespecialidad${atencion.id}`}></OptionEspecialidad>
                                         
                                     </div> 
                                     <div className="col">
