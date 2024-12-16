@@ -1,7 +1,6 @@
 import LoginPage from "../features/Auth/LoginPage";
 import RecoverPassword from "../features/Auth/RecoverPassword";
 import SetNewPassword from "../features/Auth/SetNewPassword";
-import Dashboard from "../features/Dashboard/Dashboard";
 import Home from "../features/Home/Home";
 import {ListPacient} from "../features/Pacients/ListPacient";
 import SearchPacient from "../features/Pacients/SearchPacient";

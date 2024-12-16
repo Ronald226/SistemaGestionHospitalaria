@@ -34,6 +34,11 @@ export const UpdateAtenciones:React.FC<UpdateAtencionesProps> =({atencion,index,
     const [valorEspecialidades,setValorEspecialidades] = useState<number>(atencion.doctor.especialidad.id);
 
     const [valorNombre,setValorNombre]=useState<string>(atencion.paciente.nombres);
+    const [valorApellido,setValorApellido]=useState<string>(atencion.paciente.apellidos);
+    const [valorDni,setValorDni]=useState<number>(atencion.paciente.dni);
+    const [valorHistoria,setValorHistoria]=useState<number>(atencion.paciente.historia);
+    const [valorFecha,setValorFecha]=useState<string>(atencion.fecha);
+    const [valorId,setValorId]=useState<number>(atencion.id)
 
     const inicialEstado=(index:number)=>{
         const btn:any=document.getElementById(`updateestado${index}`)
@@ -168,17 +173,17 @@ export const UpdateAtenciones:React.FC<UpdateAtencionesProps> =({atencion,index,
                                     </div>
                                     <div className="col">
                                     <label htmlFor={`atencionupdateapellidos${atencion.id}`} className="form-label fw-bold text-dorian-light">Apellidos</label>
-                                        <input readOnly defaultValue={atencion.paciente.apellidos} id={`atencionupdateapellidos${atencion.id}`} type="text" className="form-control"/>
+                                        <input readOnly defaultValue={valorApellido} id={`atencionupdateapellidos${atencion.id}`} type="text" className="form-control"/>
                                     </div>
                                 </div>
                                 <div className="row shadow-lg p-3 mb-2 mx-1 bg-body rounded">
                                     <div className="col">
                                         <label htmlFor={`atencionupdatedni${atencion.id}`} className="form-label fw-bold text-dorian-light">DNI</label>
-                                        <input readOnly defaultValue={atencion.paciente.dni} id={`atencionupdatedni${atencion.id}`} type="text" className="form-control"/>
+                                        <input readOnly defaultValue={valorDni} id={`atencionupdatedni${atencion.id}`} type="text" className="form-control"/>
                                     </div>
                                     <div className="col">
                                         <label htmlFor={`atencionupdatehistoria${atencion.id}`} className="form-label fw-bold text-dorian-light">N° Historia</label>
-                                        <input readOnly defaultValue={atencion.paciente.historia} id={`atencionupdatehistoria${atencion.id}`} 
+                                        <input readOnly defaultValue={valorHistoria} id={`atencionupdatehistoria${atencion.id}`} 
                                         type="text" 
                                         className="form-control"
                                         {...register("historia", {
@@ -217,14 +222,14 @@ export const UpdateAtenciones:React.FC<UpdateAtencionesProps> =({atencion,index,
                                     </div> 
                                     <div className="col">
                                         <label htmlFor={`atencionupdatefecha${atencion.id}`} className="form-label fw-bold text-dorian-light">Fecha de Registro</label>
-                                        <input readOnly defaultValue={formatDate(atencion.fecha)} id={`atencionupdatefecha${atencion.id}`} 
+                                        <input readOnly defaultValue={formatDate(valorFecha)} id={`atencionupdatefecha${atencion.id}`} 
                                         type="text" 
                                         className="form-control"
                                         {...register("fecha", {
                                     
                                         })}
                                         />
-                                        <input readOnly defaultValue={atencion.id} hidden
+                                        <input readOnly defaultValue={valorId} hidden
                                         type="text"
                                         className="form-control"
                                         {...register("id", {
