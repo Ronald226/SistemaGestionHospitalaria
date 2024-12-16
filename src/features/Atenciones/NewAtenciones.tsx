@@ -4,7 +4,7 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import {get_doctores,get_especialidades,register_atencion} from "./../../services/Atenciones/Atenciones"
 import {list_pacient} from "../../services/Pacients/Pacients"
 
-const NewAtenciones:React.FC=()=>{
+const NewAtenciones:React.FC=() => {
     return (
         <>
             <main className="main">
@@ -28,7 +28,7 @@ interface RegisterAtencionForm{
 interface simpleOption{
     iden:string
 }
-const FormularioNewAtencion:React.FC = ()=>{
+const FormularioNewAtencion:React.FC = () => {
     const [msgNew, setText] = useState<string>("");
     const navigate = useNavigate();
     const {register, handleSubmit, formState: { errors },clearErrors,setValue,watch} = useForm<RegisterAtencionForm>();
