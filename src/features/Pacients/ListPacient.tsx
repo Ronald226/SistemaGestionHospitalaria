@@ -2,7 +2,7 @@ import './ListPacient.css'
 import React,{ useState, useEffect } from "react";
 import {list_pacient } from "../../services/Pacients/Pacients"
 import { useNavigate } from 'react-router-dom';
-import ControlsModuls from '../layaout/ControlsModuls';
+import {ControlsModuls} from '../layaout/ControlsModuls';
 import DeletePacient from './DeletePacient';
 import ViewPacient from './ViewPacient';
 import UpadatePacientModal from './UpdatePacientModal';

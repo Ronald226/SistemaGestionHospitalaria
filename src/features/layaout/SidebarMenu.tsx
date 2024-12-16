@@ -4,7 +4,7 @@ import "./SidebarMenu.css"
 
 
 
-const SidebarMenu:React.FC=() =>{
+const SidebarMenu:React.FC=() => {
     const {getRol,getSes,destroyToken}=useStoreSesion();
     const rol=getRol();
     const ses=getSes();
@@ -42,7 +42,7 @@ const SidebarMenu:React.FC=() =>{
     )
 }
 interface SidebarMenuProps{
-    destroySesion:()=> void
+    destroySesion:() => void
 }
 export const DescripcionUser:React.FC=() =>{
     const {getName,getRol}=useStoreSesion();
@@ -72,12 +72,12 @@ export const SidebarMenuUser:React.FC<SidebarMenuProps>= ({destroySesion})=>{
                         <span>Farmacia</span>
                         </a>
                     </li>
-                    {/* <li>
+                    <li>
                         <a onClick={()=>navigate("/administracion")}>
                         <img src="/img/module-admin-icon.png" alt="" />
                         <span>Administracion</span>
                         </a>
-                    </li> */}
+                    </li> 
                     <li>
                         <a >
                         <img src="/img/setting-icon.png" alt="" />

@@ -16,3 +16,10 @@ export const formatDate = (isoDate: string): string => {
 
     return `${day}-${month}-${year}`;
 };
+
+export const formatDateISO = (isoDate: string):string => {
+    const partes = isoDate.split("-");
+    const formatoISO = `${partes[2]}-${partes[1]}-${partes[0]}`; 
+    
+    return formatoISO;
+}

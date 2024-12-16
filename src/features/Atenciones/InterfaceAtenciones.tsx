@@ -6,16 +6,19 @@ export interface Atenciones{
     fecha: string,
     especialidad: string,
     estado: boolean,
-    paciente: pacientsProps
-    doctor: Doctor
+    paciente: pacientsProps,
+    doctor: Doctor,
 }
 
 export interface Doctor{
-    id:number
-    nombre: string
-    apellido: string
-    especialidad: null
+    id:number,
+    nombre: string,
+    apellido: string,
+    especialidad: Especialidad,
 }
-
+export interface Especialidad{
+    id:number,
+    nombre:string,
+}
 
 

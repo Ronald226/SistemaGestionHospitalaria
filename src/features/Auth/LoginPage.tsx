@@ -36,7 +36,7 @@ const LoginPage:React.FC = () =>{
             // const user = { email: data_user.email, token: data_user.token };
             // localStorage.setItem('usuario', JSON.stringify(user));
             
-            startToken(data_user.token,data_user.role,"Juan");
+            startToken(data_user.token,data_user.role,data_user.name);
             console.log(getTok())
             navigate(`/patients`);
         }else{

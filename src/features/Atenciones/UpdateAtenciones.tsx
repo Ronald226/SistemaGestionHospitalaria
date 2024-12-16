@@ -1,7 +1,7 @@
 import { Atenciones } from "./InterfaceAtenciones";
-import { formatDate } from "./FormatAtencion";
+import { formatDate,formatDateISO } from "./FormatAtencion";
 import React,{ useState,useEffect} from "react";
-import { useForm, SubmitHandler } from 'react-hook-form'
+import { useForm, SubmitHandler, set } from 'react-hook-form'
 import {update_atenciones,get_doctores,get_especialidades} from "./../../services/Atenciones/Atenciones"
 
 
@@ -28,11 +28,17 @@ export const UpdateAtenciones:React.FC<UpdateAtencionesProps> =({atencion,index,
     // const [especialidadinicial,setEspecialidadinicial]=useState<number>(0);
     const [estado, setEstado] = useState(atencion.estado ? "Pasado" : "Pendiente");
     const [msgUpdate, setText] = useState<string>("");
+    
+    
+    const [valorDoctor,setValorDoctor]=useState<number>(atencion.doctor.id);
+    const [valorEspecialidades,setValorEspecialidades] = useState<number>(atencion.doctor.especialidad.id);
 
     const inicialEstado=(index:number)=>{
         const btn:any=document.getElementById(`updateestado${index}`)
         btn.classList.replace(btn.className,atencion.estado ? "pasado" : "pendiente")
         setEstado(atencion.estado ? "Pasado" : "Pendiente")
+        setValorDoctor(atencion.doctor.id)
+        setValorEspecialidades(atencion.doctor.especialidad.id)
     }
     const changeEstado=(id:string)=>{
         const btn:any=document.getElementById(id);
@@ -41,12 +47,13 @@ export const UpdateAtenciones:React.FC<UpdateAtencionesProps> =({atencion,index,
         console.log(btn.className)
         setValue("estado",String(btn.className))
         setEstado(btn.className);
+        // setValorDoctor(valorinicialDoctor)
     }
-
+    
     const fetchUpadateAtenciones: SubmitHandler<UpdateAtencionesForm> = async (data) => {
         console.log(data)
         const historia:number = data.historia
-        const fecha:string = data.fecha
+        const fecha:string = formatDateISO(data.fecha)
         const doctorId:number = data.doctorId
         const especialidadId:number = data.especialidadId
         const estado:boolean = (data.estado=="pasado")?true:false
@@ -62,30 +69,33 @@ export const UpdateAtenciones:React.FC<UpdateAtencionesProps> =({atencion,index,
     };
     const OptionEspecialidad:React.FC<simpleOption> =({id,iden}) =>{
         const [especialidades,setEspecialidades] = useState<any[]>([]);
-        const [valorinicial,setValorinicial] = useState<string>("");
+        
         const fetchEspecialidades =async()=>{
             const data = await get_especialidades();
             setEspecialidades(data);
-
-            // Encontrar la especialidad inicial según el ID recibido
-            const especialidadInicial = data.find((especialidad: any) => especialidad.nombre === id);
-            if (especialidadInicial) {
-                setValorinicial(especialidadInicial.id);
-                setValue("especialidadId",especialidadInicial.id)
-            }
+            
         }
         useEffect(() => {
             fetchEspecialidades();
+            setValue("especialidadId",valorEspecialidades)
         }, []);
-       
+
+        const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+            const value = e.target.value;
+            setValorEspecialidades(parseInt(value))
+             // Actualiza el valor en react-hook-form
+        };
         return (
             <>
-                <select className="form-select" id={iden} defaultValue={valorinicial}
-                    {...register("especialidadId",{})}
+                <select className="form-select" id={iden} value={valorEspecialidades}
+                    {...register("especialidadId",{
+                        required:""
+                    })}
+                    onChange={handleSelectChange}
                 >
                     {
                         especialidades.map((especialidad:any) => (
-                            <option selected={especialidad.nombre==id} value={especialidad.id}>{especialidad.nombre}</option>
+                            <option value={especialidad.id}>{especialidad.nombre}</option>
                             
                         ))
                     }
@@ -93,32 +103,43 @@ export const UpdateAtenciones:React.FC<UpdateAtencionesProps> =({atencion,index,
             </>
         )
     }
+    
+
     const OptionDoctor:React.FC<simpleOption> =({id,iden})=>{
         const [doctores, setDoctores] = useState<any[]>([]);
-        const [valorinicial,setValorinicial] = useState<string>("");
+        
         
         const fetchDoctores= async() =>{
             const data = await get_doctores();
             setDoctores(data);
-
+            // setValorDoctor(atencion.doctor.id)
             // Encontrar la especialidad inicial según el ID recibido
-            
-            setValorinicial(id);
-            setValue("doctorId",id)
+            // setValorinicialDoctor(id);
+            // setValorDoctor(data.id)
+            // setValue("doctorId",id)
             
         }
         useEffect(() => {
             fetchDoctores();
+            setValue("doctorId",valorDoctor)
         }, []);
+        const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+            const value = e.target.value;
+            setValorDoctor(parseInt(value))
+             // Actualiza el valor en react-hook-form
+        };
         console.log(id)
         return (
             <>
-            <select className="form-select" id={iden} defaultValue={valorinicial}
-            {...register("doctorId",{})}
+            <select className="form-select" id={iden} value={valorDoctor}
+            {...register("doctorId",{
+                required: ""
+            })}
+            onChange={handleSelectChange}
             >
                 {
                     doctores.map((doctor:any) => (
-                        <option selected={doctor.id==id} value={doctor.id}>{doctor.nombre +" "+ doctor.apellido}</option>
+                        <option value={doctor.id}>{doctor.nombre +" "+ doctor.apellido}</option>
                     ))
                 }
             </select>
@@ -127,35 +148,35 @@ export const UpdateAtenciones:React.FC<UpdateAtencionesProps> =({atencion,index,
     }
     return (
         <>
-            <img className='my-btn' data-bs-toggle="modal" data-bs-target={`#staticBackdroUpdateAtencion${index}`} src="/img/btn-update.png" alt="" />
-            <div className="modal fade" id={`staticBackdroUpdateAtencion${index}`} data-bs-backdrop="static" data-bs-keyboard="false" tabIndex={-1} aria-labelledby={`staticBackdropUpdateAtencionLabel${index}`} >
+            <img className='my-btn' data-bs-toggle="modal" data-bs-target={`#staticBackdroUpdateAtencion${atencion.id}`} src="/img/btn-update.png" alt="" />
+            <div className="modal fade" id={`staticBackdroUpdateAtencion${atencion.id}`} data-bs-backdrop="static" data-bs-keyboard="false" tabIndex={-1} aria-labelledby={`staticBackdropUpdateAtencionLabel${atencion.id}`} >
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h1 className="modal-title fs-5 text-dorian fw-bold" id={`staticBackdropUpdateAtencionLabel${index}`}>Editar informacion de la Atencion</h1>
-                            <button type="button" onClick={()=>{setRefreshList((prev) => prev + 1);inicialEstado(index)}} className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <h1 className="modal-title fs-5 text-dorian fw-bold" id={`staticBackdropUpdateAtencionLabel${atencion.id}`}>Editar informacion de la Atencion</h1>
+                            <button type="button" onClick={()=>{setRefreshList((prev) => prev + 1);inicialEstado(atencion.id)}} className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <form onSubmit={handleSubmit(fetchUpadateAtenciones)}>
                         <div className="modal-body">
                             <div className="list-group">
                                 <div className="row shadow-lg p-3 mb-2 mx-1 bg-body rounded">
                                     <div className="col">
-                                        <label htmlFor={`atencionupdatenombres${index}`} className="form-label fw-bold text-dorian-light">Nombres</label>
-                                        <input readOnly defaultValue={atencion.paciente.nombres} id={`atencionupdatenombres${index}`} type="text" className="form-control"/>
+                                        <label htmlFor={`atencionupdatenombres${atencion.id}`} className="form-label fw-bold text-dorian-light">Nombres</label>
+                                        <input readOnly defaultValue={atencion.paciente.nombres} id={`atencionupdatenombres${atencion.id}`} type="text" className="form-control"/>
                                     </div>
                                     <div className="col">
-                                    <label htmlFor={`atencionupdateapellidos${index}`} className="form-label fw-bold text-dorian-light">Apellidos</label>
-                                        <input readOnly defaultValue={atencion.paciente.apellidos} id={`atencionupdateapellidos${index}`} type="text" className="form-control"/>
+                                    <label htmlFor={`atencionupdateapellidos${atencion.id}`} className="form-label fw-bold text-dorian-light">Apellidos</label>
+                                        <input readOnly defaultValue={atencion.paciente.apellidos} id={`atencionupdateapellidos${atencion.id}`} type="text" className="form-control"/>
                                     </div>
                                 </div>
                                 <div className="row shadow-lg p-3 mb-2 mx-1 bg-body rounded">
                                     <div className="col">
-                                        <label htmlFor={`atencionupdatedni${index}`} className="form-label fw-bold text-dorian-light">DNI</label>
-                                        <input readOnly defaultValue={atencion.paciente.dni} id={`atencionupdatedni${index}`} type="text" className="form-control"/>
+                                        <label htmlFor={`atencionupdatedni${atencion.id}`} className="form-label fw-bold text-dorian-light">DNI</label>
+                                        <input readOnly defaultValue={atencion.paciente.dni} id={`atencionupdatedni${atencion.id}`} type="text" className="form-control"/>
                                     </div>
                                     <div className="col">
-                                        <label htmlFor={`atencionupdatehistoria${index}`} className="form-label fw-bold text-dorian-light">N° Historia</label>
-                                        <input readOnly defaultValue={atencion.paciente.historia} id={`atencionupdatehistoria${index}`} 
+                                        <label htmlFor={`atencionupdatehistoria${atencion.id}`} className="form-label fw-bold text-dorian-light">N° Historia</label>
+                                        <input readOnly defaultValue={atencion.paciente.historia} id={`atencionupdatehistoria${atencion.id}`} 
                                         type="text" 
                                         className="form-control"
                                         {...register("historia", {
@@ -164,9 +185,9 @@ export const UpdateAtenciones:React.FC<UpdateAtencionesProps> =({atencion,index,
                                         />
                                     </div>
                                     <div className="col">
-                                        <label htmlFor={`atencionupdateestado${index}`} className="form-label fw-bold text-dorian-light">Estado</label>
-                                        <div className={atencion.estado?"pasado":"pendiente"} id={`updateestado${index}`} onClick={()=>changeEstado(`updateestado${index}`)} >{estado}</div>
-                                        <input hidden value={estado} id={`atencionupdateestado${index}`} 
+                                        <label htmlFor={`atencionupdateestado${atencion.id}`} className="form-label fw-bold text-dorian-light">Estado</label>
+                                        <div className={atencion.estado?"pasado":"pendiente"} id={`updateestado${atencion.id}`} onClick={()=>changeEstado(`updateestado${atencion.id}`)} >{estado}</div>
+                                        <input hidden value={estado} id={`atencionupdateestado${atencion.id}`} 
                                         type="text" 
                                         className="form-control"
                                         {...register("estado", {
@@ -177,24 +198,24 @@ export const UpdateAtenciones:React.FC<UpdateAtencionesProps> =({atencion,index,
                                 </div>
                                 <div className="row shadow-lg p-3 mb-2 mx-1 bg-body rounded">
                                     <div className="col">
-                                        <label htmlFor={`atencionupdatedoctor${index}`} className="form-label fw-bold text-dorian-light">Doctor@</label>
+                                        <label htmlFor={`atencionupdatedoctor${atencion.id}`} className="form-label fw-bold text-dorian-light">Doctor@</label>
                                         {/* <input defaultValue={atencion.doctor.nombre+" "+atencion.doctor.apellido} id={`atenciondoctor${index}`} type="text" className="form-control" /> */}
                                         
-                                        <OptionDoctor  id={atencion.doctor.id} iden={`atencionupdatedoctor${index}`}></OptionDoctor>
+                                        <OptionDoctor  id={atencion.doctor.id} iden={`atencionupdatedoctor${atencion.id}`}></OptionDoctor>
                                         
                                     </div>
                                 </div>
                                 <div className="row shadow-lg p-3 mb-2 mx-1 bg-body rounded">
                                     <div className="col">
-                                        <label htmlFor={`atencionupdateespecialidad${index}`} className="form-label fw-bold text-dorian-light">Especialidad</label>
+                                        <label htmlFor={`atencionupdateespecialidad${atencion.doctor.especialidad.id}`} className="form-label fw-bold text-dorian-light">Especialidad</label> 
                                         {/* <input defaultValue={atencion.especialidad} id={`atencionespecialidad${index}`} type="text" className="form-control" /> */}
                                         
-                                        <OptionEspecialidad id={atencion.especialidad} iden={`atencionupdateespecialidad${index}`}></OptionEspecialidad>
+                                        <OptionEspecialidad id={atencion.doctor.especialidad.id} iden={`atencionupdateespecialidad${atencion.doctor.especialidad.id}`}></OptionEspecialidad>
                                         
-                                    </div>
+                                    </div> 
                                     <div className="col">
-                                        <label htmlFor={`atencionupdatefecha${index}`} className="form-label fw-bold text-dorian-light">Fecha de Registro</label>
-                                        <input readOnly defaultValue={formatDate(atencion.fecha)} id={`atencionupdatefecha${index}`} 
+                                        <label htmlFor={`atencionupdatefecha${atencion.id}`} className="form-label fw-bold text-dorian-light">Fecha de Registro</label>
+                                        <input readOnly defaultValue={formatDate(atencion.fecha)} id={`atencionupdatefecha${atencion.id}`} 
                                         type="text" 
                                         className="form-control"
                                         {...register("fecha", {
@@ -211,10 +232,9 @@ export const UpdateAtenciones:React.FC<UpdateAtencionesProps> =({atencion,index,
                                     </div>
                                 </div>
                             </div>
-                            
                         </div>
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary mx-2" onClick={()=>{setRefreshList((prev) => prev + 1);inicialEstado(index)}} data-bs-dismiss="modal">Regresar</button>
+                            <button type="button" className="btn btn-secondary mx-2" onClick={()=>{setRefreshList((prev) => prev + 1);inicialEstado(atencion.id)}} data-bs-dismiss="modal">Regresar</button>
                             <button type="submit" className="btn btn-warning mx-2" data-bs-dismiss="modal">Actualizar</button>
                         </div>
                         </form>
