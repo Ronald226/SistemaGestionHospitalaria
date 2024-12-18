@@ -79,7 +79,7 @@ export const SidebarMenuUser:React.FC<SidebarMenuProps>= ({destroySesion})=>{
                         </a>
                     </li> 
                     <li>
-                        <a >
+                        <a onClick={()=>navigate("/settings")}>
                         <img src="/img/setting-icon.png" alt="" />
                         <span>Configuracion</span>
                         </a>
@@ -108,7 +108,7 @@ export const SidebarMenuAdmision:React.FC<SidebarMenuProps>= ({destroySesion})=>
                         </a>
                     </li>
                     <li>
-                        <a >
+                        <a onClick={()=>navigate("/settings")}>
                         <img src="/img/setting-icon.png" alt="" />
                         <span>Configuracion</span>
                         </a>
@@ -137,7 +137,7 @@ export const SidebarMenuFarmacia:React.FC<SidebarMenuProps>= ({destroySesion})=>
                         </a>
                     </li>
                     <li>
-                        <a >
+                        <a onClick={()=>navigate("/settings")}>
                         <img src="/img/setting-icon.png" alt="" />
                         <span>Configuracion</span>
                         </a>
@@ -178,7 +178,7 @@ export const SidebarMenuAdmin:React.FC<SidebarMenuProps>= ({destroySesion})=>{
                         </a>
                     </li>
                     <li>
-                        <a >
+                        <a onClick={()=>navigate("/settings")}>
                         <img src="/img/setting-icon.png" alt="" />
                         <span>Configuracion</span>
                         </a>

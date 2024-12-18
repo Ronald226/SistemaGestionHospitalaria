@@ -12,6 +12,7 @@ import { ListFarmacia } from "../features/Farmacia/ListFarmacia";
 import { ListAdministracion } from "../features/Administracion/ListAdministracion";
 import NewFarmaco from "../features/Farmacia/NewFarmaco";
 import NewUsuario from "../features/Administracion/NewUsuarios";
+import Settings from "../features/Administracion/Settings";
 interface RouteType {
   path: string;
   element: any;
@@ -80,7 +81,12 @@ export const routes: RouteType[] = [
     isPrivate: true,
     user: ["admin"],
   },
-  
+  {
+    path: "/settings",
+    element: Settings,
+    isPrivate: true,
+    user: ["user","farmacia","admin"],
+  },
 ];
 
 export const routes_sesion:RouteType[] = [
