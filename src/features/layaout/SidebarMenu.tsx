@@ -15,7 +15,7 @@ const SidebarMenu:React.FC=() => {
     const navigate = useNavigate();
     const CloseSesion=()=>{
         destroyToken();
-        navigate('/login')
+        navigate('/')
     }
     switch (rol) {
         case "admision":

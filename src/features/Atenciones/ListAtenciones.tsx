@@ -6,17 +6,21 @@ import { formatDate } from "./FormatAtencion";
 import {ViewAtencion} from "./ViewAtenciones";
 import {UpdateAtenciones} from "./UpdateAtenciones";
 import {DeleteAtenciones} from "./DeleteAtenciones";
+
 export const ListAtenciones:React.FC=() => {
     const [msg, setText] = useState<string>("Cargando datos...");
     const [atenciones, setAtenciones] = useState<any[]>([]); // Almacena la lista de pacientes
     const [RefreshList,setRefreshList] = useState<number>(0);
-
+    let Tabla=(
+        <Tabla_list_atenciones atenciones={atenciones} msg={msg} setRefreshList={setRefreshList} from={"atenciones/"}/>
+    );
     const fetchAtenciones = async () => {
         const data = await list_atenciones();
         if (data) {
             console.log("Datos obtenidos con éxito:", data);
             setAtenciones(data); // Almacena los pacientes en el estado
             setText(""); // Limpia cualquier mensaje
+            
         } else {
             console.log("Error al obtener los datos.");
             setText("Error al cargar los datos.");
@@ -25,13 +29,17 @@ export const ListAtenciones:React.FC=() => {
     // Llama a fetchPacients al montar el componente
     useEffect(() => {
         fetchAtenciones();
+        // Tabla=(
+        //     <Tabla_list_atenciones atenciones={atenciones} msg={msg} setRefreshList={setRefreshList} from={"atenciones/"}/>
+        // )
     }, [RefreshList]);
    
     return (
         <>
             <ControlsModuls></ControlsModuls>
             <main className='main'>
-            <Tabla_list_atenciones  atenciones={atenciones} msg={msg} setRefreshList={setRefreshList} from={"atenciones/"}></Tabla_list_atenciones>
+                {/* {Tabla} */}
+                <Tabla_list_atenciones atenciones={atenciones} msg={msg} setRefreshList={setRefreshList} from={"atenciones/"}/>
             </main>
         </>
     )
@@ -98,7 +106,7 @@ export const Tabla_list_atenciones:React.FC<Tabla_list_atenciones_props>=({atenc
                                                 <td>
                                                     
                                                 <UpdateAtenciones atencion={atencion} index={index} setRefreshList={setRefreshList}></UpdateAtenciones>
-                                                <ViewAtencion atencion={atencion} index={index}></ViewAtencion>   
+                                                <ViewAtencion atencion={atencion} index={index} setRefreshList={setRefreshList}></ViewAtencion>   
                                                 <DeleteAtenciones atencion={atencion} index={index} setRefreshList={setRefreshList}></DeleteAtenciones>
           
                                                 

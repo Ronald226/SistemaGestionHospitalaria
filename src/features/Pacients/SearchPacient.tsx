@@ -39,8 +39,8 @@ const SelectComponent: React.FC<SelectComponentProps> = ({ options, defaultValue
         }
     };
     return (
-        <div>
-            <label htmlFor="custom-select">Escoge una Opcion</label>
+        <div className='m-3'>
+            <label htmlFor="custom-select">Realizar la Busqueda por</label>
             <select
             id="custom-select"
             value={selectedOption}
@@ -55,7 +55,7 @@ const SelectComponent: React.FC<SelectComponentProps> = ({ options, defaultValue
             </select>
 
             <div style={{ marginTop: '1rem' }}>
-            <h2>Selected Component:</h2>
+            <h2>Busqueda por: </h2>
             {renderSelectedComponent()}
             </div>
         </div>
@@ -63,8 +63,8 @@ const SelectComponent: React.FC<SelectComponentProps> = ({ options, defaultValue
     };
 const SearchPacient: React.FC = () => {
     const options = [
-        { value: 'option1', label: 'Option 1' },
-        { value: 'option2', label: 'Option 2' },
+        { value: 'option1', label: 'DNI' },
+        { value: 'option2', label: 'Nombres y Apellidos' },
     ];
     return (
         <>
@@ -129,7 +129,7 @@ const SearchPacientByDNI:React.FC=() => {
         <>
         <div className='contenedor-form-search'>
         <form onSubmit={handleSubmit(fetchPacientsByDNI)} className="form-inline my-2 my-lg-0 d-flex flex-row h-25 justify-content-around" >
-            <input className="flex-fill w-50 form-control mr-sm-2" type="search" placeholder="Search-DNI" aria-label="Search"
+            <input className="flex-fill w-50 form-control mr-sm-2 mx-2" type="search" placeholder="DNI" aria-label="Search"
                 {...register("dni", {
                     required: "Campo es requerido",
                     minLength: {
@@ -211,7 +211,7 @@ const SearchPacientByName:React.FC=() => {
         <>
         <div className='contenedor-form-search'>
         <form onSubmit={handleSubmit(fetchPacientsByName)} className="form-inline my-2 my-lg-0 d-flex flex-row h-25 justify-content-around" >
-            <input className="flex-fill w-50 form-control mr-sm-2" type="text" placeholder="Search-Nombres" aria-label="Search"
+            <input className="flex-fill w-50 form-control mr-sm-2 mx-2" type="text" placeholder="Nombres" aria-label="Search"
                 {...register("nombres", {
                     
                     
@@ -220,7 +220,7 @@ const SearchPacientByName:React.FC=() => {
                     }
                 })}
             />
-            <input className="flex-fill w-50 form-control mr-sm-2" type="text" placeholder="Search-Apellidos" aria-label="Search"
+            <input className="flex-fill w-50 form-control mr-sm-2 mx-2" type="text" placeholder="Apellidos" aria-label="Search"
                 {...register("apellidos", {
                    
                     
@@ -229,7 +229,7 @@ const SearchPacientByName:React.FC=() => {
                     }
                 })}
             />
-            <button className="flex-fill w-25 btn btn-success my-2 my-sm-0" type="submit">Buscar por Nombres y Apellidos</button>
+            <button className="flex-fill w-25 btn btn-success my-2 my-sm-0" type="submit">Buscar</button>
             {errors.nombres && <p>{errors.nombres.message}</p>}
         </form>
         </div>

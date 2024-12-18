@@ -3,7 +3,10 @@
   padding: 0;
 }
 /**Estilos del layout**/
-
+html{
+  width: 100%;
+  min-width: 510px;
+}
 body{
   display: flex;
   justify-content: center;
@@ -14,11 +17,13 @@ body{
   background: rgb(216,210,252);
   background: linear-gradient(136deg, rgba(216,210,252,1) 0%, rgba(253,226,224,1) 28%, rgba(230,228,234,1) 59%, rgba(224,233,244,1) 100%);
   padding: 60px 35px 35px 35px ;
+  min-width: 510px;
 }
 #root{
   display: flex;
   flex: 1;
   width: 100%;
+  min-width: 450px;
   min-height: 670px;
 }
 
@@ -115,7 +120,8 @@ h2{
   border: 1px solid rgba(1,1,1,0.2);
   padding: 15px 10px;
   max-width: 750px;
-  min-width: 600px;
+  width: 100%;
+  min-width: 390px;
 }
 .formulario-modal{
   border-radius: 2%;
@@ -213,8 +219,21 @@ h2{
     width: 100% !important;
   }
 }
+@media (max-width: 750px) {
+  .menu-user{
+    min-width: 400px;
+    flex-wrap: wrap !important;
+  }
+  .menu-user li{
+    margin: 0 15px !important;
+    width: 30px !important;
+  }
+}
 @media (max-width: 600px) {
   #root{
     width: 400px;
+  }
+  .menu-user{
+    min-width: 300px;
   }
 }

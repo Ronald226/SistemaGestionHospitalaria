@@ -10,6 +10,8 @@ import { ListAtenciones } from "../features/Atenciones/ListAtenciones";
 import NewAtenciones from "../features/Atenciones/NewAtenciones";
 import { ListFarmacia } from "../features/Farmacia/ListFarmacia";
 import { ListAdministracion } from "../features/Administracion/ListAdministracion";
+import NewFarmaco from "../features/Farmacia/NewFarmaco";
+import NewUsuario from "../features/Administracion/NewUsuarios";
 interface RouteType {
   path: string;
   element: any;
@@ -18,24 +20,6 @@ interface RouteType {
 }
 
 export const routes: RouteType[] = [
-  {
-    path: "/",
-    element: Home,
-    isPrivate: false,
-    user: ["all"],
-  },
-  {
-    path: "/recovery",
-    element: RecoverPassword,
-    isPrivate: true,
-    user: ["all"],
-  },
-  {
-    path: "/setNewPassword",
-    element: SetNewPassword,
-    isPrivate: true,
-    user: ["all"],
-  },
   {
     path: "/patients",
     element: ListPacient,
@@ -79,18 +63,43 @@ export const routes: RouteType[] = [
     user: ["user","farmacia","admin"],
   },
   {
+    path: "/farmacia/new",
+    element: NewFarmaco,
+    isPrivate: true,
+    user: ["user","farmacia","admin"],
+  },
+  {
     path: "/administracion",
     element: ListAdministracion,
     isPrivate: true,
     user: ["admin"],
   },
+  {
+    path: "/administracion/new",
+    element: NewUsuario,
+    isPrivate: true,
+    user: ["admin"],
+  },
+  
 ];
 
 export const routes_sesion:RouteType[] = [
   {
-    path: "/login",
+    path: "/",
     element: LoginPage,
     isPrivate: false,
+    user: ["all"],
+  },
+  {
+    path: "/recovery",
+    element: RecoverPassword,
+    isPrivate: true,
+    user: ["all"],
+  },
+  {
+    path: "/setNewPassword",
+    element: SetNewPassword,
+    isPrivate: true,
     user: ["all"],
   },
 ];

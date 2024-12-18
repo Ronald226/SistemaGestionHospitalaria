@@ -38,7 +38,7 @@ export const ControlsModulsFarmacia = ()=>{
                     <img src="/img/pacient-icon1.png" alt="" />
                     <span>Farmacia</span>
                 </Link>
-                <Link to="/farmacia">
+                <Link to="/farmacia/new">
                     <img src="/img/pacient-icon1.png" alt="" />
                     <span>Nuevo Farmaco</span>
                 </Link>
@@ -54,7 +54,7 @@ export const ControlsModulsAdministracion = ()=>{
                     <img src="/img/pacient-icon1.png" alt="" />
                     <span>Usuarios</span>
                 </Link>
-                <Link to="/administracion">
+                <Link to="/administracion/new">
                     <img src="/img/pacient-icon1.png" alt="" />
                     <span>Nuevo Usuario</span>
                 </Link>

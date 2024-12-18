@@ -38,7 +38,24 @@ const LoginPage:React.FC = () =>{
             
             startToken(data_user.token,data_user.role,data_user.name);
             console.log(getTok())
-            navigate(`/patients`);
+            switch (data_user.role) {
+                    case "admision":
+                        navigate(`/patients`);
+                        break;
+                    case "user":
+                        navigate(`/patients`);
+                        break;
+                    case "farmacia":
+                        navigate(`/farmacia`);
+                        break;
+                    case "admin":
+                        navigate(`/patients`);
+                        break;
+                    default:
+                        navigate(`/`);
+                        break;
+                }
+            
         }else{
             setText("Usuario o contraseña no valido");
         }

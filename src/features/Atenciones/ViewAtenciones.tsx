@@ -2,12 +2,13 @@ import { Atenciones } from "./InterfaceAtenciones";
 import { formatDate } from "./FormatAtencion";
 
 interface ViewAtencionProps{
-    atencion: Atenciones
-    index:number
+    atencion: Atenciones,
+    index:number,
+    setRefreshList:React.Dispatch<React.SetStateAction<number>>
 }
 
-export const ViewAtencion:React.FC<ViewAtencionProps> =({atencion,index})=> {
-
+export const ViewAtencion:React.FC<ViewAtencionProps> =({atencion,index,setRefreshList})=> {
+    console.log(atencion)
 
     return (
         <>
@@ -23,22 +24,22 @@ export const ViewAtencion:React.FC<ViewAtencionProps> =({atencion,index})=> {
                             <div className="list-group">
                                 <div className="row shadow-lg p-3 mb-2 mx-1 bg-body rounded">
                                     <div className="col">
-                                        <label htmlFor={`atencionnombres${index}`} className="form-label fw-bold text-success">Nombres</label>
-                                        <input readOnly defaultValue={atencion.paciente.nombres} id={`atencionnombres${index}`} type="text" className="form-control" />
+                                        <label htmlFor={`atencionviewnombres${index}`} className="form-label fw-bold text-success">Nombres</label>
+                                        <input readOnly value={atencion.paciente.nombres} id={`atencionviewnombres${index}`} type="text" className="form-control" />
                                     </div>
                                     <div className="col">
-                                    <label htmlFor={`atencionapellidos${index}`} className="form-label fw-bold text-success">Apellidos</label>
-                                        <input readOnly defaultValue={atencion.paciente.apellidos} id={`atencionapellidos${index}`} type="text" className="form-control"/>
+                                    <label htmlFor={`atencionviewapellidos${index}`} className="form-label fw-bold text-success">Apellidos</label>
+                                        <input readOnly value={atencion.paciente.apellidos} id={`atencionviewapellidos${index}`} type="text" className="form-control"/>
                                     </div>
                                 </div>
                                 <div className="row shadow-lg p-3 mb-2 mx-1 bg-body rounded">
                                     <div className="col">
-                                        <label htmlFor={`atenciondni${index}`} className="form-label fw-bold text-success">DNI</label>
-                                        <input readOnly defaultValue={atencion.paciente.dni} id={`atenciondni${index}`} type="text" className="form-control"/>
+                                        <label htmlFor={`atencionviewdni${index}`} className="form-label fw-bold text-success">DNI</label>
+                                        <input readOnly value={atencion.paciente.dni} id={`atencionviewdni${index}`} type="text" className="form-control"/>
                                     </div>
                                     <div className="col">
-                                        <label htmlFor={`atencionhistoria${index}`} className="form-label fw-bold text-success">N° Historia</label>
-                                        <input readOnly defaultValue={atencion.paciente.historia} id={`atencionhistoria${index}`} type="text" className="form-control"/>
+                                        <label htmlFor={`atencionviewhistoria${index}`} className="form-label fw-bold text-success">N° Historia</label>
+                                        <input readOnly value={atencion.paciente.historia} id={`atencionviewhistoria${index}`} type="text" className="form-control"/>
                                     </div>
                                     <div className="col">
                                         <label htmlFor={`atencionestado${index}`} className="form-label fw-bold text-success">Estado</label>
@@ -48,18 +49,18 @@ export const ViewAtencion:React.FC<ViewAtencionProps> =({atencion,index})=> {
                                 </div>
                                 <div className="row shadow-lg p-3 mb-2 mx-1 bg-body rounded">
                                     <div className="col">
-                                        <label htmlFor={`atenciondoctor${index}`} className="form-label fw-bold text-success">Doctor@</label>
-                                        <input readOnly defaultValue={atencion.doctor.nombre+" "+atencion.doctor.apellido} id={`atenciondoctor${index}`} type="text" className="form-control" />
+                                        <label htmlFor={`atencionviewdoctor${index}`} className="form-label fw-bold text-success">Doctor@</label>
+                                        <input readOnly value={atencion.doctor.nombre+" "+atencion.doctor.apellido} id={`atencionviewdoctor${index}`} type="text" className="form-control" />
                                     </div>
                                 </div>
                                 <div className="row shadow-lg p-3 mb-2 mx-1 bg-body rounded">
                                     <div className="col">
-                                        <label htmlFor={`atencionespecialidad${index}`} className="form-label fw-bold text-success">Especialidad</label>
-                                        <input readOnly defaultValue={atencion.especialidad} id={`atencionespecialidad${index}`} type="text" className="form-control" />
+                                        <label htmlFor={`atencionviewespecialidad${index}`} className="form-label fw-bold text-success">Especialidad</label>
+                                        <input readOnly value={atencion.doctor.especialidad.nombre} id={`atencionviewespecialidad${index}`} type="text" className="form-control" />
                                     </div>
                                     <div className="col">
-                                        <label htmlFor={`atencionfecha${index}`} className="form-label fw-bold text-success">Fecha de Registro</label>
-                                        <input readOnly defaultValue={formatDate(atencion.fecha)} id={`atencionfecha${index}`} type="text" className="form-control" />
+                                        <label htmlFor={`atencionviewfecha${index}`} className="form-label fw-bold text-success">Fecha de Registro</label>
+                                        <input readOnly value={formatDate(atencion.fecha)} id={`atencionviewfecha${index}`} type="text" className="form-control" />
                                     </div>
                                 </div>
                             </div>
