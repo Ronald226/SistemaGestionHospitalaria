@@ -94,7 +94,7 @@ export const UpdateAtenciones:React.FC<UpdateAtencionesProps> =({atencion,index,
         };
         return (
             <>
-                <select className="form-select" id={iden} value={valorEspecialidades}
+                <select disabled className="form-select" id={iden} value={valorEspecialidades}
                     {...register("especialidadId",{
                         required:""
                     })}

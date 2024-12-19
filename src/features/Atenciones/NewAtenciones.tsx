@@ -172,7 +172,7 @@ const FormularioNewAtencion:React.FC = () => {
     
     return (
         <>
-            <form onSubmit={handleSubmit(fetchRegisterAtencion)}>
+            <form onSubmit={handleSubmit(fetchRegisterAtencion)} className="formulario my-4" >
                 <p className="text-success">{msgNew}</p>
                 <div className="list-group">
                     <div className="row shadow-lg p-3 mb-2 mx-1 bg-body rounded">
@@ -206,15 +206,12 @@ const FormularioNewAtencion:React.FC = () => {
                             />
                             {errors.fecha && <p>{errors.fecha.message}</p>}
                         </div>
-                        <div className="col">
-                            <label htmlFor={`atencionregisterespecialidad`} className="form-label fw-bold text-dorian-light">Especialidad</label>
+                        {/* <div className="col">
+                            <label htmlFor={`atencionregisterespecialidad`} className="form-label fw-bold text-dorian-light">Especialidad</label> */}
                             {/* <input defaultValue={atencion.especialidad} id={`atencionespecialidad${index}`} type="text" className="form-control" /> */}
-                            <OptionEspecialidad iden={`atencionregisterespecialidad`}></OptionEspecialidad>
+                            {/* <OptionEspecialidad iden={`atencionregisterespecialidad`}></OptionEspecialidad>
                             {errors.especialidadId && <p>{errors.especialidadId.message}</p>}
-                        </div>
-                    </div>
-                    <div className="row shadow-lg p-3 mb-2 mx-1 bg-body rounded">
-                        
+                        </div> */}
                         <div className="col">
                             <label htmlFor={`atencionregisterestado`} className="form-label fw-bold text-dorian-light">Estado</label>
                             <select id={`atencionregisterestado`} className={`form-select ${errors.historia ? "is-invalid" : ""}`}
@@ -228,7 +225,9 @@ const FormularioNewAtencion:React.FC = () => {
                             {errors.doctorId && <p>{errors.doctorId.message}</p>}
                         </div>
                     </div>
-                    <div className="row justify-content-center">
+                    {/* <div className="row shadow-lg p-3 mb-2 mx-1 bg-body rounded">
+                    </div> */}
+                    <div className="row justify-content-center mt-3 mb-2">
                         <button type="button" onClick={()=>{CancelNewAtencion()}} className="btn btn-secondary mx-2 w-25">Regresar</button>
                         <button type="submit" className="btn btn-warning mx-2 w-25">Registrar</button>
                     </div>

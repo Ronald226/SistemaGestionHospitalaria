@@ -101,6 +101,7 @@
     width: 100%;
     font-size: 16px;
     transition: all 1s;
+    text-overflow: ellipsis;
 }
 .rol.shrink{
     font-size: 12px;

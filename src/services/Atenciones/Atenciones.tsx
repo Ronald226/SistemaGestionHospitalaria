@@ -28,9 +28,10 @@ export const update_atenciones= async (hist:number,fec:String,docId:number,espId
           doctorId: doctorId,
           estado: est,
       });
-      const responesp:any = await update_doctores(doctorId,especialidadId);
+      // const responesp:any = await update_doctores(doctorId,especialidadId);
 
-      if ((respon.status === 200 || respon.status === 201) && responesp) {
+      // if ((respon.status === 200 || respon.status === 201) && responesp) {
+        if (respon.status === 200 || respon.status === 201){
           console.log("Actualizacion exitosa:", respon.data);
           return true; // Retorna los datos de la respuesta si es necesario
         } else {
@@ -129,7 +130,6 @@ export const register_atencion= async (hist:number,docId:number,espId:number,fec
           historia: historia,
           fecha: String(fec),
           doctorId: doctorId,
-          especialidadId: especialidadId,
           estado: estado,
       });
       if (respon.status === 200 || respon.status === 201) {
