@@ -7,7 +7,7 @@ import { createChat } from '@n8n/chat';
 function App() {
   useEffect(() => {
     createChat({
-      webhookUrl: 'https://ron22hp.app.n8n.cloud/webhook/f54cb8ca-4510-4727-8142-45bc0a2906d9/chat', 
+      webhookUrl: 'https://leben.app.n8n.cloud/webhook/6c18caa6-ddef-44af-9064-067594c4cdd4/chat', 
       mode: 'window', 
       defaultLanguage: 'es',
       initialMessages: [
